@@ -111,7 +111,7 @@ public class Dice extends GameObject {
 
             default:
                 spritesheet = BitmapFactory.decodeResource(context.getResources(), R.drawable.jpn_dice);
-                sound.setSoundResource(R.raw.dice_shake);
+                sound.setSoundResource(R.raw.dice_shake, true);
                 frames = 16;
         }
 

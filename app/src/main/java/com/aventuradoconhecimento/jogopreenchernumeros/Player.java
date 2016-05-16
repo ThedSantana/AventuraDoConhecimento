@@ -1,5 +1,6 @@
 package com.aventuradoconhecimento.jogopreenchernumeros;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
@@ -15,8 +16,10 @@ public class Player extends GameObject {
     private List<Number> numbers;
     private int color;
     private String name;
+    private SoundPoolPlayer sound;
 
-    public Player(Bitmap res, int xAxis, int yAxis, int playerColor, String playerName) {
+    public Player(Context c, Bitmap res, int xAxis, int yAxis, int playerColor, String playerName) {
+        sound = new SoundPoolPlayer(c);
         image = res;
         x = xAxis;
         y = yAxis;
@@ -76,16 +79,34 @@ public class Player extends GameObject {
         playing = b;
     }
 
-    public boolean verifyTouchedNumber(int chosen, MotionEvent event) {
+    public boolean isTouchedNumber(int numberToCheck, MotionEvent event) {
         for (Number number: numbers) {
-            if (number.isTouched(event)) {
-                if (number.isCorrect(chosen)) {
-                    number.fill();
+            if (number.isTouched(event) || number.isFilled()) {
+                if (number.isCorrect(numberToCheck)) {
+                    if (!number.isFilled()) {
+                        sound.play(R.raw.elephant);
+                        number.fill();
+                    }
+
                     return true;
                 }
             }
         }
 
         return false;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public boolean isWinner() {
+        for (Number number: numbers) {
+            if (!number.isFilled()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

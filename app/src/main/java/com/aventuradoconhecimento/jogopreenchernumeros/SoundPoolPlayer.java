@@ -14,6 +14,7 @@ public class SoundPoolPlayer {
     private int selectedSound = 0;
     private int streamId;
     private boolean loaded;
+    private int loop;
 
 
     public SoundPoolPlayer(Context context) {
@@ -41,16 +42,20 @@ public class SoundPoolPlayer {
 
         mSounds.put(R.raw.dice_shake, soundPool.load(context, R.raw.dice_shake, 1));
         mSounds.put(R.raw.dice_throw, soundPool.load(context, R.raw.dice_throw, 1));
+        mSounds.put(R.raw.elephant, soundPool.load(context, R.raw.elephant, 1));
+    }
+
+    public void setSoundResource(int soundResource, boolean loop) {
+        selectedSound = (int) mSounds.get(soundResource);
+        this.loop = loop ? -1 : 0;
     }
 
     public void setSoundResource(int soundResource) {
-        selectedSound = (int) mSounds.get(soundResource);
+        setSoundResource(soundResource, false);
     }
 
     public void play() {
         if (loaded) {
-            int loop = selectedSound == (int) mSounds.get(R.raw.dice_shake) ? -1 : 0;
-
             streamId = soundPool.play(selectedSound, 0.99f, 0.99f, 0, loop, 1);
         }
     }

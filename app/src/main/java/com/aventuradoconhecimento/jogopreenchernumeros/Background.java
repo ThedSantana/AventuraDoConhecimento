@@ -1,24 +1,20 @@
 package com.aventuradoconhecimento.jogopreenchernumeros;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 public class Background {
 
     private Bitmap image;
-    private int x, y, dx;
+    private int x, y;
 
-    public Background(Bitmap res) {
-        image = res;
-        dx = GamePanel.MOVESPEED;
+    public Background(Context context) {
+        image = BitmapFactory.decodeResource(context.getResources(), R.drawable.jpn_background);
     }
 
-    public void update() {
-        x += dx;
-        if (x < -GamePanel.WIDTH) {
-            x = 0;
-        }
-    }
+    public void update() {}
 
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image, x, y, null);

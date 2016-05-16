@@ -13,14 +13,14 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
-
     private enum Actions {
-        ROLL_DICE, CHOSSE_NUMBER
+        ROLL_DICE, NEW_GAME, CHOSSE_NUMBER
     }
 
     public static int WIDTH = 800;
     public static int HEIGHT = 480;
     public static final int MOVESPEED = 0;
+    private static final long BLINK_DURATION = 350;
 
     private MainThread thread;
     private Background bg;
@@ -29,6 +29,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Dice dice, dice2;
     private Actions action;
     private Player playerTurn;
+
+    private int blinkColor;
+    private long blinkStart;
+    private long lastUpdateTime;
+    private boolean blink;
 
     public GamePanel(Context context) {
         super(context);
@@ -65,29 +70,33 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         paintText = new Paint();
-        paintText.setColor(Color.RED);
         paintText.setTextSize(18);
         paintText.setFakeBoldText(true);
 
-        bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.jpn_background));
+        blinkColor = Color.BLUE;
 
-        player1 = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player1_elephant)
-                , 30, 110, Color.YELLOW, "Jogador 1"
-        );
-        player2 = new Player(BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player2_elephant)
-                , 470, 110, Color.GREEN, "Jogador 2"
-        );
+        bg = new Background(getContext());
 
-        // passa o sprite e não a imagem da frente do dado
         dice = new Dice(getContext(), 250, 5);
         dice2 = new Dice(getContext(), 450, 5);
+
+        setNewGame();
+
+        thread.setRunning(true);
+        thread.start();
+    }
+
+    private void setNewGame() {
+        player1 = new Player(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player1_elephant)
+                , 30, 110, Color.YELLOW, "Jogador 1"
+        );
+        player2 = new Player(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player2_elephant)
+                , 470, 110, Color.GREEN, "Jogador 2"
+        );
 
         playerTurn = player1;
         playerTurn.setPlaying(true);
         action = Actions.ROLL_DICE;
-
-        thread.setRunning(true);
-        thread.start();
     }
 
     @Override
@@ -95,6 +104,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                if (action.equals(Actions.NEW_GAME)) setNewGame();
+
                 if (action.equals(Actions.ROLL_DICE)) {
                     if (!dice.isRolling()) {
                         dice.startRolling();
@@ -111,7 +122,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 if (action.equals(Actions.CHOSSE_NUMBER)) {
                     int result = dice.getResult() + dice2.getResult();
 
-                    if (playerTurn.verifyTouchedNumber(result, event)) {
+                    if (playerTurn.isTouchedNumber(result, event)) {
+                        if (playerTurn.isWinner()) {
+                            action = Actions.NEW_GAME;
+                            return true;
+                        }
+
                         if (player1.isPlaying()) {
                             player1.setPlaying(false);
                             playerTurn = player2;
@@ -122,10 +138,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
                         playerTurn.setPlaying(true);
                         action = Actions.ROLL_DICE;
+
                     }
                 }
                 return true;
-
             default:
                 return super.onTouchEvent(event);
         }
@@ -135,6 +151,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         if (dice.isRolling()) {
             dice.update();
             dice2.update();
+        }
+
+        if (System.currentTimeMillis() - lastUpdateTime >= BLINK_DURATION && !blink) {
+            blink = true;
+            blinkStart = System.currentTimeMillis();
+        }
+        
+        if (System.currentTimeMillis() - blinkStart >= 800 && blink) {
+            blink = false;
+            lastUpdateTime = System.currentTimeMillis();
         }
     }
 
@@ -156,7 +182,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.restoreToCount(savedState);
         }
 
-        canvas.drawText("É a vez do "+ playerTurn.getName(), 20, 20, paintText);
+        paintText.setColor(Color.RED);
+        canvas.drawText("É a vez do ", 20, 20, paintText);
+        paintText.setColor(playerTurn.getColor());
+        canvas.drawText(playerTurn.getName(), 110, 20, paintText);
+
+        if (blink) {
+            blinkColor = (blinkColor == Color.BLUE) ? Color.RED :
+                    ((blinkColor == Color.YELLOW) ? Color.BLUE : Color.YELLOW);
+            paintText.setColor(blinkColor);
+        }
+        if (playerTurn.isWinner()) {
+            canvas.drawText(playerTurn.getName() +" GANHOU!!!", WIDTH / 2 - 100, HEIGHT / 2, paintText);
+        }
     }
 
 
