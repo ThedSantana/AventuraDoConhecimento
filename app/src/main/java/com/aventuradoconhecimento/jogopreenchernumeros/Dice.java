@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 
 import java.util.Random;
 
@@ -14,8 +16,10 @@ public class Dice extends GameObject {
     private Animation animation = new Animation();
     private boolean rolling;
     private Context context;
+    private SoundPoolPlayer sound;
 
     public Dice(Context c, int xAxys, int yAxis) {
+        sound = new SoundPoolPlayer(c);
         context = c;
         x = xAxys;
         y = yAxis;
@@ -26,11 +30,14 @@ public class Dice extends GameObject {
     public void startRolling() {
         rolling = true;
         resetDice();
+        sound.play();
     }
 
     public void stopRolling() {
         rolling = false;
         raffleResult();
+        sound.stop();
+        sound.play();
     }
 
     public boolean isRolling() {
@@ -52,7 +59,6 @@ public class Dice extends GameObject {
     }
 
     public int getResult() {
-
         return result;
     }
 
@@ -76,6 +82,7 @@ public class Dice extends GameObject {
 
     private void setImage() {
         frames = 1;
+        sound.setSoundResource(R.raw.dice_throw);
 
         switch (result) {
             case 1:
@@ -104,6 +111,7 @@ public class Dice extends GameObject {
 
             default:
                 spritesheet = BitmapFactory.decodeResource(context.getResources(), R.drawable.jpn_dice);
+                sound.setSoundResource(R.raw.dice_shake);
                 frames = 16;
         }
 

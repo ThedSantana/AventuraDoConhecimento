@@ -1,12 +1,11 @@
 package com.aventuradoconhecimento.jogopreenchernumeros;
 
 import android.graphics.Rect;
+import android.view.MotionEvent;
 
-public abstract class GameObject {
+public abstract class GameObject  {
     protected int x;
     protected int y;
-    protected int dy;
-    protected int dx;
     protected int width;
     protected int height;
 
@@ -38,4 +37,13 @@ public abstract class GameObject {
         return new Rect(x, y, x + width, y + height);
     }
 
+    public boolean isTouched(MotionEvent event) {
+        if (event.getX() >= x && event.getX() < (x + width)
+                && event.getY() >= y && event.getY() < (y + height)
+        ) {
+            return true;
+        }
+
+        return false;
+    }
 }

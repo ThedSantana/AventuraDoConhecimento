@@ -30,7 +30,6 @@ public class MainThread extends Thread {
             startTime = System.nanoTime();
             canvas = null;
 
-            //try locking the canvas for pixel editing
             try {
                 canvas = this.surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
@@ -38,6 +37,7 @@ public class MainThread extends Thread {
                     this.gamePanel.draw(canvas);
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             } finally {
                 if (canvas != null) {
                     try {
@@ -63,7 +63,7 @@ public class MainThread extends Thread {
                 averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
                 frameCount = 0;
                 totalTime = 0;
-                System.out.println(averageFPS);
+                //System.out.println(averageFPS);
             }
         }
     }
