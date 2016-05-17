@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,8 +18,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         ROLL_DICE, NEW_GAME, CHOSSE_NUMBER
     }
 
-    public static int WIDTH = 800;
-    public static int HEIGHT = 480;
+    public static int WIDTH = 0;
+    public static int HEIGHT = 0;
     public static final int MOVESPEED = 0;
     private static final long BLINK_DURATION = 350;
 
@@ -48,13 +49,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        //Log.v("EVENT", "SizeChanged! " + w + " " + h);
-        //Log.v("EVENT", "OldValues! " + oldw + " " + oldh);
-    }
-
-    @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean retry = true;
         while(retry) {
@@ -69,6 +63,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        int w = this.getMeasuredWidth();
+        int h = this.getMeasuredHeight();
+
+        if (WIDTH != w && w > 0) {
+            WIDTH = w;
+        }
+
+        if (HEIGHT != h && h > 0) {
+            HEIGHT = h;
+        }
+
         paintText = new Paint();
         paintText.setTextSize(18);
         paintText.setFakeBoldText(true);

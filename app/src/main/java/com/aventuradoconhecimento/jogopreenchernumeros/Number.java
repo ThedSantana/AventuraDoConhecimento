@@ -3,6 +3,8 @@ package com.aventuradoconhecimento.jogopreenchernumeros;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+import android.view.MotionEvent;
 
 public class Number extends GameObject {
     private int value;
@@ -54,5 +56,21 @@ public class Number extends GameObject {
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.BLUE);
         filled = true;
+    }
+
+
+    public Rect getRectangle() {
+        return new Rect(x, y, x + width, y + height);
+    }
+
+    @Override
+    public boolean isTouched(MotionEvent event) {
+        if (event.getX() >= x-radius && event.getX() < (x + radius)
+                && event.getY() >= y-radius && event.getY() < (y + radius)
+                ) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
 
 import java.util.Random;
 
@@ -16,10 +14,10 @@ public class Dice extends GameObject {
     private Animation animation = new Animation();
     private boolean rolling;
     private Context context;
-    private SoundPoolPlayer sound;
+    private SoundList sound;
 
     public Dice(Context c, int xAxys, int yAxis) {
-        sound = new SoundPoolPlayer(c);
+        sound = new SoundList(c);
         context = c;
         x = xAxys;
         y = yAxis;

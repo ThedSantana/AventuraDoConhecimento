@@ -7,9 +7,9 @@ import android.media.SoundPool;
 
 import java.util.HashMap;
 
-public class SoundPoolPlayer {
+public class SoundList {
 
-    private SoundPool soundPool = null;
+    private android.media.SoundPool soundPool = null;
     private HashMap mSounds = new HashMap();
     private int selectedSound = 0;
     private int streamId;
@@ -17,7 +17,7 @@ public class SoundPoolPlayer {
     private int loop;
 
 
-    public SoundPoolPlayer(Context context) {
+    public SoundList(Context context) {
         AudioAttributes audioAttrib = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             audioAttrib = new AudioAttributes.Builder()
@@ -25,17 +25,17 @@ public class SoundPoolPlayer {
                     .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                     .build();
 
-            soundPool = new SoundPool.Builder()
+            soundPool = new android.media.SoundPool.Builder()
                     .setMaxStreams(4)
                     .setAudioAttributes(audioAttrib)
                     .build();
         } else {
-            this.soundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+            this.soundPool = new android.media.SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         }
 
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+        soundPool.setOnLoadCompleteListener(new android.media.SoundPool.OnLoadCompleteListener() {
             @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+            public void onLoadComplete(android.media.SoundPool soundPool, int sampleId, int status) {
                 loaded = true;
             }
         });
