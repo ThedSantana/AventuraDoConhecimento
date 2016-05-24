@@ -13,14 +13,12 @@ import java.util.Random;
 public class Player extends GameObject {
 
     private boolean playing;
-    private Bitmap image;
     private List<Number> numbers;
     private int color;
     private String name;
-    private SoundList sound;
 
-    public Player(Context c, Bitmap res, int xAxis, int yAxis, int playerColor, String playerName) {
-        sound = new SoundList(c);
+    public Player(Context context, Bitmap res, int xAxis, int yAxis, int playerColor, String playerName) {
+        super(context);
         image = res;
         x = xAxis;
         y = yAxis;
@@ -59,11 +57,15 @@ public class Player extends GameObject {
             pos = listPos.remove(rand.nextInt(listPos.size()));
 
             numbers.add(
-                    new Number(i+2, pos.x, pos.y, color)
+                    new Number(context, i+2, pos.x, pos.y, color)
             );
         }
     }
 
+    @Override
+    public void update() {}
+
+    @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(image,x,y,null);
 

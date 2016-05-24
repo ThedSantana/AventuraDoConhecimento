@@ -1,13 +1,25 @@
 package com.aventuradoconhecimento.jogopreenchernumeros;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
 public abstract class GameObject  {
+
     protected int x;
     protected int y;
     protected int width;
     protected int height;
+    protected Bitmap image;
+    protected SoundList sound;
+    protected Context context;
+
+    public GameObject(Context c) {
+        context = c;
+        sound = new SoundList(context);
+    }
 
     public void setX(int x) {
         this.x = x;
@@ -36,6 +48,9 @@ public abstract class GameObject  {
     public Rect getRectangle() {
         return new Rect(x, y, x + width, y + height);
     }
+
+    public abstract void draw(Canvas canvas);
+    public abstract void update();
 
     public boolean isTouched(MotionEvent event) {
         if (event.getX() >= x && event.getX() < (x + width)

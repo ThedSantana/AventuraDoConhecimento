@@ -1,5 +1,6 @@
 package com.aventuradoconhecimento.jogopreenchernumeros;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,7 +14,9 @@ public class Number extends GameObject {
     private Paint paintText;
     private int radius;
 
-    public Number(int val, int xAxis, int yAxis, int color) {
+    public Number(Context context, int val, int xAxis, int yAxis, int color) {
+        super(context);
+
         x = xAxis;
         y = yAxis;
         radius = 20;
@@ -35,6 +38,10 @@ public class Number extends GameObject {
         return value;
     }
 
+    @Override
+    public void update() {}
+
+    @Override
     public void draw(Canvas canvas) {
         canvas.drawCircle(x, y, radius, paint);
 

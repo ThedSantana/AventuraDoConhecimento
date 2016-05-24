@@ -20,7 +20,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static int WIDTH = 0;
     public static int HEIGHT = 0;
-    public static final int MOVESPEED = 0;
     private static final long BLINK_DURATION = 350;
 
     private MainThread thread;

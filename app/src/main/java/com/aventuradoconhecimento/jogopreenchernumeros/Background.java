@@ -5,13 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-public class Background {
-
-    private Bitmap image;
-    private int x, y;
+public class Background extends GameObject{
 
     public Background(Context context) {
+        super(context);
         image = BitmapFactory.decodeResource(context.getResources(), R.drawable.jpn_background);
+        width = image.getWidth();
+        height = image.getHeight();
     }
 
     public void update() {}

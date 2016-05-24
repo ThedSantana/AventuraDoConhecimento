@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
 public class MainThread extends Thread {
+
     private int FPS = 30;
     private double averageFPS;
     private SurfaceHolder surfaceHolder;
