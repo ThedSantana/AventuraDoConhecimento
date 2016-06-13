@@ -95,7 +95,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 , 30, 110, Color.YELLOW, "Jogador 1"
         );
         player2 = new Player(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player2_elephant)
-                , 470, 110, Color.GREEN, "Jogador 2"
+                , 450, 110, Color.GREEN, "Jogador 2"
         );
 
         playerTurn = player1;
