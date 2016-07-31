@@ -84,14 +84,15 @@ public class Player extends GameObject {
 
     public boolean isTouchedNumber(int numberToCheck, MotionEvent event) {
         for (Number number: numbers) {
-            if (number.isTouched(event) || number.isFilled()) {
-                if (number.isCorrect(numberToCheck)) {
-                    if (!number.isFilled()) {
-                        sound.play(R.raw.elephant);
-                        number.fill();
-                    }
+            if (number.isCorrect(numberToCheck)) {
+                if (number.isFilled()) return true;
+                if (number.isTouched(event)) {
+                    sound.play(R.raw.elephant);
+                    number.fill();
 
                     return true;
+                } else {
+                    sound.play(R.raw.error);
                 }
             }
         }
