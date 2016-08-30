@@ -3,6 +3,7 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ public class WordView extends View implements Runnable {
     private Figure actualFigure;
     private List<LetterBox> emptyBoxes;
     private ArrayList<Letter> letterBoxes;
+
+    private Letter letterToMove;
 
     public WordView(Context context) {
         super(context);
@@ -77,11 +80,11 @@ public class WordView extends View implements Runnable {
             bg.update();
             actualFigure.update();
 
-            for (LetterBox lb: emptyBoxes) {
+            for (LetterBox lb : emptyBoxes) {
                 lb.update();
             }
 
-            for (Letter l: letterBoxes) {
+            for (Letter l : letterBoxes) {
                 l.update();
             }
         }
@@ -91,13 +94,57 @@ public class WordView extends View implements Runnable {
         bg.draw(canvas);
         actualFigure.draw(canvas);
 
-        for (LetterBox lb: emptyBoxes) {
+        for (LetterBox lb : emptyBoxes) {
             lb.draw(canvas);
         }
 
-        for (Letter l: letterBoxes) {
+        for (Letter l : letterBoxes) {
             l.draw(canvas);
         }
+    }
+
+    public boolean onTouchEvent(MotionEvent event) {
+        int positionX = (int) event.getRawX();
+        int positionY = (int) event.getRawY();
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN: {
+                for (Letter l : letterBoxes) {
+                    if (l.isTouched(event)) {
+                        letterToMove = l;
+                        break;
+                    }
+                }
+            }
+            break;
+
+            case MotionEvent.ACTION_MOVE: {
+                if (letterToMove != null) {
+                    letterToMove.startDrag(event);
+//                    Log.d("MOVENDO", "Letra"+letterToMove.getValue());
+                }
+            }
+            break;
+            case MotionEvent.ACTION_UP:
+                if (letterToMove != null) {
+                    for (LetterBox lB: emptyBoxes) {
+                        if (lB.isTouched(event)
+                            && lB.isEmpty()
+                            && letterToMove.getValue() == lB.getValue()
+                        ) {
+                            lB.setEmpty(false);
+                            lB.setImageResource(letterToMove.getImageResource());
+                            letterBoxes.remove(letterToMove);
+                        } else {
+                            letterToMove.drop(true);
+                        }
+                    }
+
+                    letterToMove = null;
+                }
+                break;
+        }
+        return true;
     }
 
     @Override
@@ -111,7 +158,7 @@ public class WordView extends View implements Runnable {
         double averageFPS;
 
         try {
-            while(running) {
+            while (running) {
                 startTime = System.nanoTime();
 
                 synchronized (this) {

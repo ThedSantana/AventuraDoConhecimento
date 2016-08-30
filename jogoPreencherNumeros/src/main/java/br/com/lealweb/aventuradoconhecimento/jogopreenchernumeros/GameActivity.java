@@ -24,7 +24,7 @@ public class GameActivity extends Activity {
                 View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_FLAG_FULLSCREEN
         );
 
-        setContentView(new GamePanel(this));
+        setContentView(new GameView(this));
     }
 
     @Override

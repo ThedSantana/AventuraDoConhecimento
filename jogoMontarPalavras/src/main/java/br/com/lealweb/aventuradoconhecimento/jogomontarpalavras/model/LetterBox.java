@@ -3,7 +3,6 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
 
@@ -11,14 +10,16 @@ public class LetterBox extends GameObject {
 
     private static final String TAG = "LetterBox";
 
-    private Character letter;
+    private Character value;
     private final int letterPosition;
     private final int wordLength;
     private int letterPadding = 10;
 
-    public LetterBox(char letter, int pos, int wordLength) {
+    private boolean empty = true;
+
+    public LetterBox(char character, int pos, int wordLength) {
         setImageResource(GameUtil.decodeImage("letter/box.png"));
-        setLetter(letter);
+        setValue(character);
         setWidth(imageResource.getWidth());
         setHeight(imageResource.getHeight());
         this.letterPosition = pos;
@@ -41,8 +42,6 @@ public class LetterBox extends GameObject {
             rectDst.right = getX() + getWidth();
             rectDst.top = getY();
             rectDst.bottom = getY() + getHeight();
-
-            UPDATE = false;
         }
     }
 
@@ -50,6 +49,14 @@ public class LetterBox extends GameObject {
     public void draw(Canvas canvas) {
         canvas.drawBitmap(getImageResource(),
                 rectSrc, rectDst, null);
+    }
+
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
     }
 
     public Bitmap getImageResource() {
@@ -60,11 +67,11 @@ public class LetterBox extends GameObject {
         this.imageResource = imageResource;
     }
 
-    public Character getName() {
-        return letter;
+    public Character getValue() {
+        return value;
     }
 
-    public void setLetter(Character name) {
-        this.letter = name;
+    public void setValue(Character name) {
+        this.value = name;
     }
 }

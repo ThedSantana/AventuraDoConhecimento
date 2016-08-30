@@ -12,7 +12,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 
-public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
+public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private enum Actions {
         ROLL_DICE, NEW_GAME, CHOSSE_NUMBER
@@ -35,7 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private long lastUpdateTime;
     private boolean blink;
 
-    public GamePanel(Context context) {
+    public GameView(Context context) {
         super(context);
 
         getHolder().addCallback(this);

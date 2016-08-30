@@ -3,6 +3,7 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.view.MotionEvent;
 
 import java.io.Serializable;
 
@@ -31,6 +32,16 @@ public abstract class GameObject implements Serializable {
     public void updateDistortion() {
         width = (int) (width * GameUtil.DISTORTION);
         height = (int) (height * GameUtil.DISTORTION);
+    }
+
+    public boolean isTouched(MotionEvent event) {
+        if (event.getX() >= x && event.getX() < (x + width)
+                && event.getY() >= y && event.getY() < (y + height)
+                ) {
+            return true;
+        }
+
+        return false;
     }
 
     public int getX() {
