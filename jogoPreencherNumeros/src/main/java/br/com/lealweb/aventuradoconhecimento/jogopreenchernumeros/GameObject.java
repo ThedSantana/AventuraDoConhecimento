@@ -6,7 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 
-public abstract class GameObject  {
+public abstract class GameObject {
 
     protected int x;
     protected int y;

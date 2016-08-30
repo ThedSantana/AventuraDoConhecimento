@@ -1,8 +1,5 @@
 package br.com.lealweb.aventuradoconhecimento.jogomemoria;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,13 +15,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.text.InputFilter;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MemoryView extends View {
 
@@ -48,7 +52,11 @@ public class MemoryView extends View {
 
     public MemoryView(Context context, AttributeSet attributes) {
         super(context, attributes);
-        this.game = ((MemoryActivity) context).game;
+        //this.game = ((MemoryActivity) context).game;
+
+        MemoryActivity ma = (MemoryActivity) context;
+
+        this.game = ma.game;
         // setOnTouchListener(this);
     }
 
@@ -85,8 +93,12 @@ public class MemoryView extends View {
         super.draw(canvas);
         canvas.setDensity(Bitmap.DENSITY_NONE);
 
-        canvas.drawBitmap(getSettingsCog(), 10, 10, null);
+        drawSettingsCog(canvas);
+        drawCards(canvas);
+        drawScore(canvas);
+    }
 
+    private void drawCards(Canvas canvas) {
         for (int x = 0; x < game.width; x++) {
             for (int y = 0; y < game.height; y++) {
                 int left = metrics.offsetX + (metrics.tileSize + metrics.paddingBetweenTiles) * x;
@@ -96,20 +108,27 @@ public class MemoryView extends View {
                 canvas.drawBitmap(bitmap, left, top, null);
             }
         }
+    }
 
+    private void drawSettingsCog(Canvas canvas) {
+        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.cog),
+                getWidth() - 50, 10, null);
+    }
+
+    private void drawScore(Canvas canvas) {
         Paint paintText = new Paint();
         paintText.setTextSize(18);
         paintText.setFakeBoldText(true);
         paintText.setColor(Color.WHITE);
         canvas.drawText(
                 "Pontos"
-                , game.displayedBoard.length + 20, metrics.boardHeight - 35
+                , 10, 20
                 , paintText
         );
 
         canvas.drawText(
                 String.valueOf(game.getScore())
-                , game.displayedBoard.length + 20, metrics.boardHeight - 20
+                , 10, 35
                 , paintText
         );
     }
@@ -194,10 +213,6 @@ public class MemoryView extends View {
             default:
                 return tiles[index];
         }
-    }
-
-    private Bitmap getSettingsCog() {
-        return BitmapFactory.decodeResource(getResources(), R.drawable.cog);
     }
 
     @Override

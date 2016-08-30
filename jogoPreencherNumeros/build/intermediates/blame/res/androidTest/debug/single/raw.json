@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/raw/dice_shake.wav",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/raw/dice_shake.wav"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/raw/correct.mp3",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/raw/correct.mp3"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/raw/incorrect.wav",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/raw/incorrect.wav"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/raw/dice_throw.wav",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/raw/dice_throw.wav"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/raw/elephant.wav",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/raw/elephant.wav"
+    }
+]

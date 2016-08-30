@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/AventuraDoConhecimento.iml" filepath="$PROJECT_DIR$/AventuraDoConhecimento.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jogoMemoria/jogoMemoria.iml" filepath="$PROJECT_DIR$/jogoMemoria/jogoMemoria.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jogoMontarPalavras/jogoMontarPalavras.iml" filepath="$PROJECT_DIR$/jogoMontarPalavras/jogoMontarPalavras.iml" />
       <module fileurl="file://$PROJECT_DIR$/jogoPreencherNumeros/jogoPreencherNumeros.iml" filepath="$PROJECT_DIR$/jogoPreencherNumeros/jogoPreencherNumeros.iml" />
     </modules>
   </component>

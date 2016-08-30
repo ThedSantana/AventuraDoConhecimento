@@ -1,64 +1,50 @@
 package br.com.lealweb.aventuradoconhecimento;
 
 import android.content.Intent;
-import android.content.Loader;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.WindowManager;
 import android.widget.Toast;
-
-import br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryActivity;
-import br.com.lealweb.aventuradoconhecimento.jogopreenchernumeros.Game;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        setupParameters();
+
+        setContentView(R.layout.activity_main);
+    }
+
+    private void setupParameters() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     public void loadJogoMemoria(View view) {
         Toast.makeText(this, "Jogo da Memória", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, MemoryActivity.class);
+        Intent intent = new Intent(this,
+                br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryActivity.class);
         startActivity(intent);
     }
 
     public void loadJogoPreencherNumeros(View view) {
         Toast.makeText(this, "Jogo de Preencher Números", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Game.class);
+        Intent intent = new Intent(this,
+                br.com.lealweb.aventuradoconhecimento.jogopreenchernumeros.GameActivity.class);
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void loadJogoMontarPalvras(View view) {
+        Toast.makeText(this, "Jogo de Montar Palavras", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this,
+                br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.WordActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

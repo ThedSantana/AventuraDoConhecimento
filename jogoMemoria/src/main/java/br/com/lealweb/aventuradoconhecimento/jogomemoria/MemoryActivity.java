@@ -12,7 +12,7 @@ import br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryGame.GameListener
 
 public class MemoryActivity extends Activity {
 
-	private static final String GAME_KEY = "game";
+	private static final String GAME_KEY = "gameMemory";
 
 	MemoryGame game;
 	private MemoryView view;

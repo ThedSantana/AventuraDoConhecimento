@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Jogo de Montar Palavras</string>
+    <string name="restart_menuitem_text">Reiniciar</string>
+    <string name="highscore_menuitem_text">Ranking</string>
+    <string name="no_high_score">Nenhuma pontuação ainda!</string>
+    <string name="action_settings">Configurações</string>
+</resources>

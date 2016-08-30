@@ -1,1 +1,1 @@
-include ':app', ':jogoPreencherNumeros', ':jogoMemoria'
+include ':app', ':jogoPreencherNumeros', ':jogoMemoria', ':jogoMontarPalavras'
