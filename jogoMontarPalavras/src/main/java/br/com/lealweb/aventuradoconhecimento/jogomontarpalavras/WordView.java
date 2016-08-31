@@ -15,6 +15,7 @@ import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Letter;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.LetterBox;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Figuries;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Letters;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.SoundManager;
 
 /**
  * Created by leonardoleal on 28/08/16.
@@ -53,29 +54,39 @@ public class WordView extends View implements Runnable {
                 (float) GameUtil.SCREEN_WIDTH / bg.getWidth();
         bg.updateDistortion();
 
+        SoundManager.initSounds(getContext());
+
+        newGame();
         newTurn();
     }
 
-    private void newTurn() {
-        // adiciona figura
+    private void newGame() {
         figuries = new Figuries();
-        actualFigure = figuries.getFigure();
+    }
 
-        emptyBoxes = new ArrayList<LetterBox>();
-        letterBoxes = new ArrayList<Letter>();
+    private void newTurn() {
+        try {
+            actualFigure = figuries.getAleatorieFigure();
 
-        char[] wordLetters = actualFigure.getName().toCharArray();
-        int wordLength = wordLetters.length;
-        for (int pos = 0; pos < wordLength; pos++) {
-            emptyBoxes.add(new LetterBox(wordLetters[pos], pos, wordLength));
+            emptyBoxes = new ArrayList<LetterBox>();
+            letterBoxes = new ArrayList<Letter>();
 
-            letterBoxes.add(
-                letters.getLetterByValue(wordLetters[pos])
-            );
+            char[] wordLetters = actualFigure.getName().toCharArray();
+            int wordLength = wordLetters.length;
+            for (int pos = 0; pos < wordLength; pos++) {
+                emptyBoxes.add(new LetterBox(wordLetters[pos], pos, wordLength));
+
+                letterBoxes.add(
+                        letters.getLetterByValue(wordLetters[pos])
+                );
 //            Log.d(TAG, letters.getLetterByValue(wordLetters[pos]).getValue().toString());
-        }
+            }
 
-        // adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
+            // TODO adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
+        } catch (Exception e) {
+            Log.e(TAG, "Erro ao iniciar novo turno");
+            e.printStackTrace();
+        }
     }
 
     public void update() {
@@ -115,6 +126,7 @@ public class WordView extends View implements Runnable {
                 for (Letter l : letterBoxes) {
                     if (l.isTouched(event)) {
                         letterToMove = l;
+                        SoundManager.playClick();
                         break;
                     }
                 }
@@ -133,25 +145,45 @@ public class WordView extends View implements Runnable {
                     for (LetterBox lB: emptyBoxes) {
                         if (lB.isTouched(event)
                             && lB.isEmpty()
-                            && letterToMove.getValue() == lB.getValue()
                         ) {
-                            lB.setEmpty(false);
-                            lB.setImageResource(letterToMove.getImageResource());
-                            letterBoxes.remove(letterToMove);
-                            // emite som acerto
-                            // ganha 1 ponto
-                        } else {
-                            // emite som erro
-                            // desconta 3 pontos
-                            letterToMove.drop(true);
+                            if ( letterToMove.getValue() == lB.getValue()) {
+                                lB.setEmpty(false);
+                                lB.setImageResource(letterToMove.getImageResource());
+
+                                letterBoxes.remove(letterToMove);
+                                letterToMove = null;
+
+                                SoundManager.playCorrect();
+                                // TODO ganha 1 ponto
+
+                                if (wordCompleted()) {
+                                    SoundManager.playGameDone();
+
+                                    newTurn();
+
+                                    // TODO if game end
+                                    // game score
+                                }
+
+                                return true;
+                            } else {
+                                SoundManager.playIncorrect();
+
+                                // TODO desconta 3 pontos
+                            }
                         }
                     }
 
+                    letterToMove.drop(true);
                     letterToMove = null;
                 }
                 break;
         }
         return true;
+    }
+
+    private boolean wordCompleted() {
+        return letterBoxes.isEmpty();
     }
 
     @Override
@@ -188,6 +220,7 @@ public class WordView extends View implements Runnable {
             }
         } catch (Exception e) {
             Log.d(TAG, "Erro no loop principal do jogo.");
+            e.printStackTrace();
         }
     }
 

@@ -2,6 +2,7 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Figure;
@@ -38,7 +39,8 @@ public class Figuries {
         figures.add(new Figure("zumbi", GameUtil.decodeImage("zoombie.png")));
     }
 
-    public Figure getFigure() {
-        return figures.remove(figures.size()-1);
+    public Figure getAleatorieFigure() {
+        Random random = new Random(System.currentTimeMillis());
+        return figures.remove(random.nextInt(figures.size()));
     }
 }
