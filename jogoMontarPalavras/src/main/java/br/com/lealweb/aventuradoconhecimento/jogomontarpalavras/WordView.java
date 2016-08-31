@@ -1,11 +1,11 @@
 package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +31,8 @@ public class WordView extends View implements Runnable {
     private Background bg;
 
     // repositories
-    private Figuries figuries = new Figuries();
-    private Letters letters = new Letters();
+    private Letters letters;
+    private Figuries figuries;
 
     private Figure actualFigure;
     private List<LetterBox> emptyBoxes;
@@ -65,12 +65,13 @@ public class WordView extends View implements Runnable {
 
     private void newGame() {
         figuries = new Figuries();
+        letters = new Letters();
         player = new Player();
     }
 
     private void newTurn() {
         try {
-            actualFigure = figuries.getAleatorieFigure();
+            actualFigure = figuries.getFigureAleatorie();
 
             emptyBoxes = new ArrayList<LetterBox>();
             letterBoxes = new ArrayList<Letter>();
@@ -180,10 +181,16 @@ public class WordView extends View implements Runnable {
                                 if (wordCompleted()) {
                                     SoundManager.playGameDone();
 
-                                    newTurn();
+                                    if (gameOver()) {
+                                        // game score
+                                        Toast.makeText(getContext(),
+                                                "Fim de jogo. Pontos: " + player.getScore(),
+                                                Toast.LENGTH_SHORT).show();
 
-                                    // TODO if game end
-                                    // game score
+                                        newGame();
+                                    }
+
+                                    newTurn();
                                 }
 
                             } else {
@@ -205,6 +212,8 @@ public class WordView extends View implements Runnable {
         }
         return true;
     }
+
+    private boolean gameOver() { return figuries.isEmpty(); }
 
     private boolean wordCompleted() {
         return letterBoxes.isEmpty();

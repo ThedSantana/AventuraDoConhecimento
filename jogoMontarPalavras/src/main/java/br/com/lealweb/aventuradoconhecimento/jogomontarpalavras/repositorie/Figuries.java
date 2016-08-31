@@ -39,8 +39,12 @@ public class Figuries {
         figures.add(new Figure("zumbi", GameUtil.decodeImage("zoombie.png")));
     }
 
-    public Figure getAleatorieFigure() {
+    public Figure getFigureAleatorie() {
         Random random = new Random(System.currentTimeMillis());
         return figures.remove(random.nextInt(figures.size()));
+    }
+
+    public boolean isEmpty() {
+        return figures.isEmpty();
     }
 }
