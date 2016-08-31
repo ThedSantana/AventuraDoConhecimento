@@ -124,12 +124,12 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/drawable/jpn_dice.png"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/drawable/jpn_dice_4.png",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/drawable/jpn_dice_4.png"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/drawable/jpn_background.png",

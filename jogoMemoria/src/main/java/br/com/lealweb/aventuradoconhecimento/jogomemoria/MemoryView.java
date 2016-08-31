@@ -93,7 +93,7 @@ public class MemoryView extends View {
         super.draw(canvas);
         canvas.setDensity(Bitmap.DENSITY_NONE);
 
-        drawSettingsCog(canvas);
+        //drawSettingsCog(canvas);
         drawCards(canvas);
         drawScore(canvas);
     }

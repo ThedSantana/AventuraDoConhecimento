@@ -1,6 +1,7 @@
 package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -13,6 +14,7 @@ import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Background
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Figure;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Letter;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.LetterBox;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Player;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Figuries;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Letters;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.SoundManager;
@@ -37,6 +39,7 @@ public class WordView extends View implements Runnable {
     private List<Letter> letterBoxes;
 
     private Letter letterToMove;
+    private Player player;
 
     public WordView(Context context) {
         super(context);
@@ -62,6 +65,7 @@ public class WordView extends View implements Runnable {
 
     private void newGame() {
         figuries = new Figuries();
+        player = new Player();
     }
 
     private void newTurn() {
@@ -72,21 +76,38 @@ public class WordView extends View implements Runnable {
             letterBoxes = new ArrayList<Letter>();
 
             char[] wordLetters = actualFigure.getName().toCharArray();
-            int wordLength = wordLetters.length;
-            for (int pos = 0; pos < wordLength; pos++) {
-                emptyBoxes.add(new LetterBox(wordLetters[pos], pos, wordLength));
-
-                letterBoxes.add(
-                        letters.getLetterByValue(wordLetters[pos])
-                );
-//            Log.d(TAG, letters.getLetterByValue(wordLetters[pos]).getValue().toString());
+            for (int pos = 0; pos < wordLetters.length; pos++) {
+                generateEmptyBoxes(wordLetters, pos);
+                generateLetterBoxes(wordLetters, pos);
+                // TODO adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
             }
-
-            // TODO adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
         } catch (Exception e) {
             Log.e(TAG, "Erro ao iniciar novo turno");
             e.printStackTrace();
         }
+    }
+
+    private void generateEmptyBoxes(char[] wordLetters, int pos) {
+        emptyBoxes.add(new LetterBox(wordLetters[pos], pos, wordLetters.length));
+    }
+
+    private void generateLetterBoxes(char[] wordLetters, int pos) {
+        boolean isOnEmptySpace;
+        Letter letter;
+        do {
+            isOnEmptySpace = true;
+
+            letter = letters.getLetterByValue(wordLetters[pos]);
+
+            for (Letter l: letterBoxes) {
+                if (l.isTouched(letter.getX(), letter.getY())) {
+                    isOnEmptySpace = false;
+                }
+                //Log.d(letter.toString(), l.toString());
+            }
+        } while (! isOnEmptySpace);
+
+        letterBoxes.add(letter);
     }
 
     public void update() {
@@ -115,16 +136,16 @@ public class WordView extends View implements Runnable {
         for (Letter l : letterBoxes) {
             l.draw(canvas);
         }
+
+        player.drawScore(canvas);
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-        int positionX = (int) event.getRawX();
-        int positionY = (int) event.getRawY();
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
                 for (Letter l : letterBoxes) {
-                    if (l.isTouched(event)) {
+                    if (l.isTouched(event.getX(), event.getY())) {
                         letterToMove = l;
                         SoundManager.playClick();
                         break;
@@ -140,21 +161,21 @@ public class WordView extends View implements Runnable {
                 }
             }
             break;
-            case MotionEvent.ACTION_UP:
+
+            case MotionEvent.ACTION_UP: {
                 if (letterToMove != null) {
-                    for (LetterBox lB: emptyBoxes) {
-                        if (lB.isTouched(event)
-                            && lB.isEmpty()
-                        ) {
-                            if ( letterToMove.getValue() == lB.getValue()) {
+                    for (LetterBox lB : emptyBoxes) {
+                        if (lB.isTouched(event.getX(), event.getY())
+                                && lB.isEmpty()
+                                ) {
+                            if (letterToMove.getValue() == lB.getValue()) {
+                                SoundManager.playCorrect();
+                                player.addPoints(1);
+
                                 lB.setEmpty(false);
                                 lB.setImageResource(letterToMove.getImageResource());
 
                                 letterBoxes.remove(letterToMove);
-                                letterToMove = null;
-
-                                SoundManager.playCorrect();
-                                // TODO ganha 1 ponto
 
                                 if (wordCompleted()) {
                                     SoundManager.playGameDone();
@@ -165,19 +186,22 @@ public class WordView extends View implements Runnable {
                                     // game score
                                 }
 
-                                return true;
                             } else {
                                 SoundManager.playIncorrect();
-
-                                // TODO desconta 3 pontos
+                                player.subtractPoints(3);
                             }
                         }
                     }
 
-                    letterToMove.drop(true);
+                    if (letterToMove.getY() > GameUtil.SCREEN_HEIGHT / 2) {
+                        letterToMove.drop(false);
+                    } else {
+                        letterToMove.drop(true);
+                    }
                     letterToMove = null;
                 }
-                break;
+            }
+            break;
         }
         return true;
     }

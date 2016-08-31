@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import java.util.Random;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Letters;
 
 /**
  * Created by leonardoleal on 29/08/16.
@@ -33,8 +34,13 @@ public class Letter extends GameObject {
 
         updateDistortion();
 
+        setXY();
+    }
+
+    private void setXY() {
         setX((int) ((GameUtil.SCREEN_WIDTH - getWidth()) * getRandPercent(0)));
         setY((int) ((GameUtil.SCREEN_HEIGHT - getHeight()) * getRandPercent(60)));
+
         originX = getX();
         originY = getY();
     }
@@ -72,6 +78,9 @@ public class Letter extends GameObject {
         if (returnOrigin) {
             setX(originX);
             setY(originY);
+        } else {
+            originX = getX();
+            originY = getY();
         }
     }
 
@@ -84,5 +93,10 @@ public class Letter extends GameObject {
         int max = 100 - minValue;
 
         return (rand.nextInt(max) + minValue) / 100.00;
+    }
+
+    @Override
+    public String toString() {
+        return " {Letter : [value="+ value +"] [x="+ getX() +"] [y="+ getY() +"]";
     }
 }

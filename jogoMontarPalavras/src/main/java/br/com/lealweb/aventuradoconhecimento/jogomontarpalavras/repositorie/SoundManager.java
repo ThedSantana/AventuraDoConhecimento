@@ -29,7 +29,7 @@ public class SoundManager {
 		SOUND_ID_CLICK = mSoundPool.load(context, R.raw.click, 1);
 		SOUND_ID_INCORRECT = mSoundPool.load(context, R.raw.incorrect, 1);
 		SOUND_ID_CORRECT = mSoundPool.load(context, R.raw.correct, 1);
-		SOUND_ID_GAME_DONE = mSoundPool.load(context, R.raw.game_done, 1);
+		SOUND_ID_GAME_DONE = mSoundPool.load(context, R.raw.done, 1);
 	}
 
 	public static void playClick() {

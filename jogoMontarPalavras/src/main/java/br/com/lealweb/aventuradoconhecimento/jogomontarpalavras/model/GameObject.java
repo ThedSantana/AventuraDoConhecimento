@@ -34,9 +34,9 @@ public abstract class GameObject implements Serializable {
         height = (int) (height * GameUtil.DISTORTION);
     }
 
-    public boolean isTouched(MotionEvent event) {
-        if (event.getX() >= x && event.getX() < (x + width)
-                && event.getY() >= y && event.getY() < (y + height)
+    public boolean isTouched(double xCord, double yCord) {
+        if (xCord >= x && xCord < (x + width)
+                && yCord >= y && yCord < (y + height)
                 ) {
             return true;
         }
