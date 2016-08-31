@@ -53,23 +53,25 @@ public class Letter extends GameObject {
                 rectSrc, rectDst, null);
     }
 
+    @Override
+    public void updateDistortion() {
+        setWidth(
+                imageResource.getWidth() * GameUtil.SCREEN_WIDTH / 1000
+        );
+        setHeight(
+                imageResource.getHeight() * GameUtil.SCREEN_HEIGHT / 600
+        );
+    }
+
     public void startDrag(MotionEvent event) {
         setX((int) event.getX() - getWidth() / 2);
         setY((int) event.getY() - getHeight() / 2);
-
-//        Log.d("ORIGIN X - Y", originX +" - "+ originY);
     }
 
     public void drop(boolean returnOrigin) {
         if (returnOrigin) {
-            do {
-                if (getX() > originX) setX(getX()-1);
-                else if (getX() < originX) setX(getX()+1);
-
-                if (getY() > originY) setY(getY()-1);
-                else if (getY() < originY) setY(getY()+1);
-
-            } while(originX != getX() || originY != getY());
+            setX(originX);
+            setY(originY);
         }
     }
 

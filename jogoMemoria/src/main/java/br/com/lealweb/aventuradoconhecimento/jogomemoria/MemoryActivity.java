@@ -2,11 +2,14 @@ package br.com.lealweb.aventuradoconhecimento.jogomemoria;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryGame.GameListener;
 
@@ -20,6 +23,9 @@ public class MemoryActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		setupParameters();
+
 		SoundManager.initSounds(this);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -59,6 +65,14 @@ public class MemoryActivity extends Activity {
 			// slight penalty since full timeout is needed:
 			view.startTimeoutCountdown();
 		}
+	}
+
+	private void setupParameters() {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 	}
 
 	@Override

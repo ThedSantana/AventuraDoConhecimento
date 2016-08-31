@@ -25,16 +25,17 @@ public class WordActivity extends Activity {
     }
 
     public void setupParameters() {
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
 
-        GameUtil.ORIENTATION = GameUtil.PORTRAIT;
+        GameUtil.ORIENTATION = getRequestedOrientation();
         GameUtil.SCREEN_WIDTH = displaymetrics.widthPixels;
         GameUtil.SCREEN_HEIGHT = displaymetrics.heightPixels;
         GameUtil.assetManager = super.getAssets();

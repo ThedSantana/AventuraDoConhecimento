@@ -12,8 +12,8 @@ import java.io.InputStream;
  */
 public class GameUtil {
 
-    public static final int PORTRAIT = 0;
-    public static final int LANDSCAPE = 1;
+    public static final int LANDSCAPE = 0;
+    public static final int PORTRAIT = 1;
 
     public static final int FPS = 30;
 

@@ -18,12 +18,13 @@ public class LetterBox extends GameObject {
     private boolean empty = true;
 
     public LetterBox(char character, int pos, int wordLength) {
+        value = character;
+        letterPosition = pos;
+        this.wordLength = wordLength;
         setImageResource(GameUtil.decodeImage("letter/box.png"));
-        setValue(character);
+
         setWidth(imageResource.getWidth());
         setHeight(imageResource.getHeight());
-        this.letterPosition = pos;
-        this.wordLength = wordLength;
 
         rectSrc = new Rect(0, 0, getWidth(), getHeight());
         rectDst = new Rect();
@@ -34,8 +35,20 @@ public class LetterBox extends GameObject {
     @Override
     public void update() {
         if (UPDATE) {
-            int portion = (GameUtil.SCREEN_WIDTH - letterPadding * wordLength) / wordLength;
-            setX(portion + (getWidth() * letterPosition));
+            int halfWidth = GameUtil.SCREEN_WIDTH / 2;
+            float halfWordLenght = wordLength / 2;
+            int posX;
+
+            if (letterPosition < halfWordLenght) {
+                posX = (int) (halfWidth - (getWidth()/2)
+                                - getWidth() *(halfWordLenght-letterPosition));
+            } else if(letterPosition > halfWordLenght) {
+                posX = (int) (halfWidth + (getWidth()/2)
+                                + getWidth() * -(halfWordLenght-letterPosition+1));
+            } else {
+                posX = halfWidth - getWidth()/2;
+            }
+            setX(posX);
             setY((int) ((GameUtil.SCREEN_HEIGHT - getHeight()) * 0.4));
 
             rectDst.left = getX() + letterPadding;
@@ -69,9 +82,5 @@ public class LetterBox extends GameObject {
 
     public Character getValue() {
         return value;
-    }
-
-    public void setValue(Character name) {
-        this.value = name;
     }
 }

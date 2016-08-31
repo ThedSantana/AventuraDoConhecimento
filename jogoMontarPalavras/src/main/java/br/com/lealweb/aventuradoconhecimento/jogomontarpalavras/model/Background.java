@@ -33,22 +33,12 @@ public class Background extends GameObject {
     }
 
     @Override
-    public void updateDistortion() {
-        super.updateDistortion();
-
-        rectDst.left = 0;
-        rectDst.right = getWidth();
-        rectDst.top = 0;
-        rectDst.bottom = getHeight();
-    }
-
-    @Override
     public void update() {
         if (UPDATE) {
-            int distortion = (int)(GameUtil.FPS * GameUtil.DISTORTION);
-
-            rectDst.left -= distortion;
-            rectDst.right -= distortion;
+            rectDst.left = 0;
+            rectDst.right = getWidth();
+            rectDst.top = 0;
+            rectDst.bottom = getHeight();
 
             UPDATE = false;
         }

@@ -23,7 +23,7 @@ public class Figure extends GameObject {
         rectSrc = new Rect(0, 0, getWidth(), getHeight());
         rectDst = new Rect();
 
-        updateDistortion();
+        super.updateDistortion();
     }
 
     @Override

@@ -33,7 +33,7 @@ public class WordView extends View implements Runnable {
 
     private Figure actualFigure;
     private List<LetterBox> emptyBoxes;
-    private ArrayList<Letter> letterBoxes;
+    private List<Letter> letterBoxes;
 
     private Letter letterToMove;
 
@@ -50,9 +50,13 @@ public class WordView extends View implements Runnable {
         // configuração do background
         bg = new Background();
         GameUtil.DISTORTION =
-                (float) GameUtil.SCREEN_HEIGHT / bg.getHeight();
+                (float) GameUtil.SCREEN_WIDTH / bg.getWidth();
         bg.updateDistortion();
 
+        newTurn();
+    }
+
+    private void newTurn() {
         // adiciona figura
         figuries = new Figuries();
         actualFigure = figuries.getFigure();
@@ -63,16 +67,15 @@ public class WordView extends View implements Runnable {
         char[] wordLetters = actualFigure.getName().toCharArray();
         int wordLength = wordLetters.length;
         for (int pos = 0; pos < wordLength; pos++) {
-            // adiciona caixas vazias relativas as letras da palavra
             emptyBoxes.add(new LetterBox(wordLetters[pos], pos, wordLength));
 
-            // adiciona letras relativas a palavra
-            letterBoxes.add(letters.getLetterByValue(wordLetters[pos]));
-
-            Log.d(TAG, letters.getLetterByValue(wordLetters[pos]).getValue().toString());
-            // adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
+            letterBoxes.add(
+                letters.getLetterByValue(wordLetters[pos])
+            );
+//            Log.d(TAG, letters.getLetterByValue(wordLetters[pos]).getValue().toString());
         }
 
+        // adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
     }
 
     public void update() {
@@ -135,7 +138,11 @@ public class WordView extends View implements Runnable {
                             lB.setEmpty(false);
                             lB.setImageResource(letterToMove.getImageResource());
                             letterBoxes.remove(letterToMove);
+                            // emite som acerto
+                            // ganha 1 ponto
                         } else {
+                            // emite som erro
+                            // desconta 3 pontos
                             letterToMove.drop(true);
                         }
                     }
