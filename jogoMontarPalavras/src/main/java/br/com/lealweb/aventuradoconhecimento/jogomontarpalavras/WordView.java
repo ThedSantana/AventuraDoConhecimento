@@ -1,10 +1,18 @@
 package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
+import android.support.annotation.NonNull;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,6 +24,7 @@ import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Letter;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.LetterBox;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Player;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Figuries;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.HighScoreDatabase;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Letters;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.SoundManager;
 
@@ -67,6 +76,11 @@ public class WordView extends View implements Runnable {
         figuries = new Figuries();
         letters = new Letters();
         player = new Player();
+    }
+
+    private void gameRestart() {
+        figuries = new Figuries();
+        player.setScore(0);
     }
 
     private void newTurn() {
@@ -186,8 +200,9 @@ public class WordView extends View implements Runnable {
                                         Toast.makeText(getContext(),
                                                 "Fim de jogo. Pontos: " + player.getScore(),
                                                 Toast.LENGTH_SHORT).show();
+                                        gameFinish();
 
-                                        newGame();
+                                        gameRestart();
                                     }
 
                                     newTurn();
@@ -217,6 +232,60 @@ public class WordView extends View implements Runnable {
 
     private boolean wordCompleted() {
         return letterBoxes.isEmpty();
+    }
+
+    private void gameFinish() {
+        SharedPreferences prefs = ((Activity) getContext()).getPreferences(Context.MODE_PRIVATE);
+        player.setName(prefs.getString("last_name", ""));
+
+        final HighScoreDatabase db = HighScoreDatabase.getDatabase(getContext());
+        int position = db.getPositionForScore(player.getScore());
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setCancelable(false);
+
+        if (position >= HighScoreDatabase.MAX_ENTRIES) {
+            alert.setMessage("Pontos: " + player.getScore());
+            alert.setPositiveButton("Ok", null);
+        } else {
+            alert.setMessage("Parabéns você bateu uma pontuação! \n\n"
+                    + "Posição no ranking: " + position + "\n"
+                    + "Pontos: " + player.getScore() + "\n"
+                    + "Digite seu nome:");
+            final EditText textInput = new EditText(getContext());
+            textInput.setText(player.getName());
+            textInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)});
+            alert.setView(textInput);
+            alert.setPositiveButton("Confirmar", salvarNoRanking(
+                    player.getScore(), player.getName(), db, textInput));
+        }
+        alert.show();
+
+        invalidate();
+    }
+
+    @NonNull
+    private DialogInterface.OnClickListener salvarNoRanking(final int finalScore, final String LAST_NAME_KEY, final HighScoreDatabase db, final EditText textInput) {
+        return new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String value = textInput.getText().toString();
+
+                SharedPreferences.Editor editor = ((Activity) getContext()).getPreferences(Context.MODE_PRIVATE).edit();
+                editor.putString(LAST_NAME_KEY, value);
+                editor.commit();
+
+                db.addEntry(value, finalScore);
+
+                showHighScoreDialog();
+            }
+        };
+    }
+
+    private void showHighScoreDialog() {
+        Intent intent = new Intent();
+        intent.setClass(getContext(), ListHighScoresActivity.class);
+        intent.putExtra(ListHighScoresActivity.JUST_STORED, true);
+        getContext().startActivity(intent);
     }
 
     @Override
