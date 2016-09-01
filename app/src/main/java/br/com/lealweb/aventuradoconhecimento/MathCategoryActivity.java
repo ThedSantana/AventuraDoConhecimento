@@ -62,12 +62,12 @@ public class MathCategoryActivity extends ActionBarActivity {
 
     private List<String> getTitles(){
         return Lists.newArrayList(
-                "123");
+                "Preencher\nNúmeros");
     }
 
     private List<Integer> getBgRes(){
         return Lists.newArrayList(
-                R.drawable.math_category);
+                R.drawable.number_game_icon);
     }
 
     @Override

@@ -62,12 +62,12 @@ public class PortugueseCategoryActivity extends ActionBarActivity {
 
     private List<String> getTitles(){
         return Lists.newArrayList(
-                "ABC");
+                "Monta\nPalavras");
     }
 
     private List<Integer> getBgRes(){
         return Lists.newArrayList(
-                R.drawable.portuguese_category);
+                R.drawable.word_game_icon);
     }
 
     @Override

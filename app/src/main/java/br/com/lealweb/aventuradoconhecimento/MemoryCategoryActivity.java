@@ -62,12 +62,12 @@ public class MemoryCategoryActivity extends ActionBarActivity {
 
     private List<String> getTitles(){
         return Lists.newArrayList(
-                "☆★☆");
+                "Jogo da\nMemória");
     }
 
     private List<Integer> getBgRes(){
         return Lists.newArrayList(
-                R.drawable.memory_category);
+                R.drawable.memory_game_icon);
     }
 
     @Override
