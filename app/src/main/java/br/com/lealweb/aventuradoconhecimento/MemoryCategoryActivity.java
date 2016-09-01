@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.common.collect.Lists;
 
@@ -20,27 +21,27 @@ import github.chenupt.multiplemodel.viewpager.PagerModelManager;
 import github.chenupt.springindicator.SpringIndicator;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MemoryCategoryActivity extends ActionBarActivity {
 
     ClickableScrollerViewPager viewPager;
-    private String TAG = "app.MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_category);
 
         viewPager = (ClickableScrollerViewPager) findViewById(R.id.view_pager);
         SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         PagerModelManager manager = new PagerModelManager();
         manager.addCommonFragment(GuideFragment.class, getBgRes(), getTitles());
         ModelPagerAdapter adapter = new ModelPagerAdapter(getSupportFragmentManager(), manager);
         viewPager.setAdapter(adapter);
         viewPager.fixScrollSpeed();
-
 
         // just set viewPager
         springIndicator.setViewPager(viewPager);
@@ -58,19 +59,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<String> getTitles(){
-        return Lists.newArrayList(
-                "123",
-                "ABC",
-                "☆★☆");
+        return Lists.newArrayList("☆", "☆", "☆", "☆");
     }
 
     private List<Integer> getBgRes(){
-        return Lists.newArrayList(
-                R.drawable.bg1,
-                R.drawable.bg2,
-                R.drawable.bg3);
+        return Lists.newArrayList(R.drawable.bg1, R.drawable.bg2, R.drawable.bg3, R.drawable.bg4);
     }
 
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return super.onTouchEvent(event);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -86,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);
             return true;
+        } else if (id == android.R.id.home) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -99,14 +100,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(int position, MotionEvent e) {
             if (position ==  0) {
-                Intent intent = new Intent(getContext(), MathCategoryActivity.class);
-                startActivity(intent);
-            } else if (position ==  1) {
-                Intent intent = new Intent(getContext(), PortugueseCategoryActivity.class);
-                startActivity(intent);
-            } else if (position ==  2) {
-                Intent intent = new Intent(getContext(), MemoryCategoryActivity.class);
-                startActivity(intent);
+                Toast.makeText(getContext(), "Jogo da Memória", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(),
+                        br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryActivity.class);
+               startActivity(intent);
             }
         }
     }
