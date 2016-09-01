@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupParameters();
+
         setContentView(R.layout.activity_main);
 
         viewPager = (ClickableScrollerViewPager) findViewById(R.id.view_pager);
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
 
         // just set viewPager
         springIndicator.setViewPager(viewPager);
-        setupParameters();
 
         viewPager.setOnItemClickListener(new MyOnItemClickListener());
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setBackgroundDrawableResource(R.drawable.main_background);
     }
 
     private List<String> getTitles(){
@@ -66,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Integer> getBgRes(){
         return Lists.newArrayList(
-                R.drawable.bg1,
-                R.drawable.bg2,
-                R.drawable.bg3);
+                R.drawable.math_category,
+                R.drawable.portuguese_category,
+                R.drawable.memory_category);
     }
 
 

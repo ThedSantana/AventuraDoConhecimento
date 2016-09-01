@@ -28,6 +28,8 @@ public class MemoryCategoryActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupParameters();
+
         setContentView(R.layout.activity_category);
 
         viewPager = (ClickableScrollerViewPager) findViewById(R.id.view_pager);
@@ -45,7 +47,6 @@ public class MemoryCategoryActivity extends ActionBarActivity {
 
         // just set viewPager
         springIndicator.setViewPager(viewPager);
-        setupParameters();
 
         viewPager.setOnItemClickListener(new MyOnItemClickListener());
 
@@ -56,14 +57,17 @@ public class MemoryCategoryActivity extends ActionBarActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getWindow().setBackgroundDrawableResource(R.drawable.main_background);
     }
 
     private List<String> getTitles(){
-        return Lists.newArrayList("☆", "☆", "☆", "☆");
+        return Lists.newArrayList(
+                "☆★☆");
     }
 
     private List<Integer> getBgRes(){
-        return Lists.newArrayList(R.drawable.bg1, R.drawable.bg2, R.drawable.bg3, R.drawable.bg4);
+        return Lists.newArrayList(
+                R.drawable.memory_category);
     }
 
     @Override

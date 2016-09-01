@@ -1,9 +1,11 @@
 package br.com.lealweb.aventuradoconhecimento;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 /**
  * Created by chenupt@gmail.com on 2015/1/25.
@@ -16,13 +18,22 @@ public class AboutActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setupParameters();
+
         setContentView(R.layout.activity_about);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar.setTitle("Sobre o App");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
+    private void setupParameters() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
