@@ -20,6 +20,8 @@ public class GameUtil {
     public static int ORIENTATION;
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
+    public static int SCREEN_WIDTH_RATIO;
+    public static int SCREEN_HEIGHT_RATIO;
 
     public static float DISTORTION = 1.0f;
     public static AssetManager assetManager;

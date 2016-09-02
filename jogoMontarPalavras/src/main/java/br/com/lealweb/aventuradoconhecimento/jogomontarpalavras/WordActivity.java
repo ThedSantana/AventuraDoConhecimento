@@ -39,5 +39,7 @@ public class WordActivity extends Activity {
         GameUtil.SCREEN_WIDTH = displaymetrics.widthPixels;
         GameUtil.SCREEN_HEIGHT = displaymetrics.heightPixels;
         GameUtil.assetManager = super.getAssets();
+        GameUtil.SCREEN_WIDTH_RATIO = 1000;
+        GameUtil.SCREEN_HEIGHT_RATIO = 600;
     }
 }

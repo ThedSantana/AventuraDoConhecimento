@@ -33,6 +33,12 @@ import java.util.TimerTask;
 public class MemoryView extends View {
 
     static class GameMetrics {
+        public static final int SCREEN_WIDTH_RATIO = 1000;
+        public static final int SCREEN_HEIGHT_RATIO = 600;
+
+        public static int SCREEN_WIDTH;
+        public static int SCREEN_HEIGHT;
+
         int boardHeight;
 
         int boardWidth;
@@ -62,6 +68,10 @@ public class MemoryView extends View {
 
     private GameMetrics computeMetrics() {
         GameMetrics m = new GameMetrics();
+
+        DisplayMetrics displaymetrics = getContext().getResources().getDisplayMetrics();
+        m.SCREEN_WIDTH = displaymetrics.widthPixels;
+        m.SCREEN_HEIGHT = displaymetrics.heightPixels;
 
         int numberOfHorizontalPaddings = game.width + 1;
         int numberOfVerticalPaddings = game.height + 1;
@@ -117,19 +127,22 @@ public class MemoryView extends View {
 
     private void drawScore(Canvas canvas) {
         Paint paintText = new Paint();
-        paintText.setTextSize(18);
+        paintText.setTextSize(20 * metrics.SCREEN_WIDTH / metrics.SCREEN_WIDTH_RATIO);
         paintText.setFakeBoldText(true);
         paintText.setColor(Color.WHITE);
+
         canvas.drawText(
-                "Pontos"
-                , 10, 20
-                , paintText
+                "Pontos",
+                10 * metrics.SCREEN_WIDTH / metrics.SCREEN_WIDTH_RATIO,
+                20 * metrics.SCREEN_HEIGHT / metrics.SCREEN_HEIGHT_RATIO,
+                paintText
         );
 
         canvas.drawText(
-                String.valueOf(game.getScore())
-                , 10, 35
-                , paintText
+                String.valueOf(game.getScore()),
+                10 * metrics.SCREEN_WIDTH / metrics.SCREEN_WIDTH_RATIO,
+                40 * metrics.SCREEN_HEIGHT / metrics.SCREEN_HEIGHT_RATIO,
+                paintText
         );
     }
 

@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/drawable/number_game_icon.png",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/drawable/number_game_icon.png"
+    },
+    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/androidTest/debug/drawable/abc_ratingbar_small_material.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_small_material.xml"
     },

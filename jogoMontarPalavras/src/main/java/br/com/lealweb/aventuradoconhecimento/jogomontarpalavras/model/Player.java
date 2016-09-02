@@ -3,6 +3,9 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
+
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
 
 /**
  * Created by leonardoleal on 31/08/16.
@@ -23,19 +26,22 @@ public class Player {
 
     public void drawScore(Canvas canvas) {
         Paint paintText = new Paint();
-        paintText.setTextSize(18);
+        paintText.setTextSize(20 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO);
         paintText.setFakeBoldText(true);
         paintText.setColor(Color.BLACK);
+
         canvas.drawText(
-                "Pontos"
-                , 10, 20
-                , paintText
+                "Pontos",
+                10 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO,
+                20 * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO,
+                paintText
         );
 
         canvas.drawText(
-                String.valueOf(score)
-                , 10, 35
-                , paintText
+                String.valueOf(score),
+                10 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO,
+                40 * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO,
+                paintText
         );
     }
 

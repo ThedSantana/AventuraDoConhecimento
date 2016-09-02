@@ -62,10 +62,10 @@ public class Letter extends GameObject {
     @Override
     public void updateDistortion() {
         setWidth(
-                imageResource.getWidth() * GameUtil.SCREEN_WIDTH / 1000
+                imageResource.getWidth() * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO
         );
         setHeight(
-                imageResource.getHeight() * GameUtil.SCREEN_HEIGHT / 600
+                imageResource.getHeight() * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO
         );
     }
 
