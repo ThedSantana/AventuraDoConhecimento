@@ -3,15 +3,12 @@ package br.com.lealweb.aventuradoconhecimento;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-/**
- * Created by chenupt@gmail.com on 2015/1/25.
- * Description TODO
- */
-public class AboutActivity extends ActionBarActivity {
+public class AboutActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 

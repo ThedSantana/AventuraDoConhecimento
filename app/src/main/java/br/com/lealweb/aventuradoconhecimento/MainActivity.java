@@ -1,115 +1,40 @@
 package br.com.lealweb.aventuradoconhecimento;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
-import github.chenupt.multiplemodel.viewpager.ModelPagerAdapter;
-import github.chenupt.multiplemodel.viewpager.PagerModelManager;
-import github.chenupt.springindicator.SpringIndicator;
 
+public class MainActivity extends DefaultActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    ClickableScrollerViewPager viewPager;
-    private String TAG = "app.MainActivity";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setupParameters();
-
-        setContentView(R.layout.activity_main);
-
-        viewPager = (ClickableScrollerViewPager) findViewById(R.id.view_pager);
-        SpringIndicator springIndicator = (SpringIndicator) findViewById(R.id.indicator);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
-
-        PagerModelManager manager = new PagerModelManager();
-        manager.addCommonFragment(GuideFragment.class, getBgRes(), getTitles());
-        ModelPagerAdapter adapter = new ModelPagerAdapter(getSupportFragmentManager(), manager);
-        viewPager.setAdapter(adapter);
-        viewPager.fixScrollSpeed();
-
-
-        // just set viewPager
-        springIndicator.setViewPager(viewPager);
-
-        viewPager.setOnItemClickListener(new MyOnItemClickListener());
-
-    }
-
-    private void setupParameters() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        getWindow().setBackgroundDrawableResource(R.drawable.main_background);
-    }
-
-    private List<String> getTitles(){
+    protected List<String> getTitles(){
         return Lists.newArrayList(
                 "123",
                 "ABC",
                 "☆★☆");
     }
 
-    private List<Integer> getBgRes(){
+    protected List<Integer> getBgRes(){
         return Lists.newArrayList(
                 R.drawable.math_category,
                 R.drawable.portuguese_category,
                 R.drawable.memory_category);
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_about) {
-            Intent intent = new Intent(this, AboutActivity.class);
+    public void onItemClick(int position, MotionEvent e) {
+        if (position ==  0) {
+            Intent intent = new Intent(getBaseContext(), MathCategoryActivity.class);
             startActivity(intent);
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private Context getContext() {
-        return this;
-    }
-    private class MyOnItemClickListener implements ClickableScrollerViewPager.OnItemClickListener {
-
-        @Override
-        public void onItemClick(int position, MotionEvent e) {
-            if (position ==  0) {
-                Intent intent = new Intent(getContext(), MathCategoryActivity.class);
-                startActivity(intent);
-            } else if (position ==  1) {
-                Intent intent = new Intent(getContext(), PortugueseCategoryActivity.class);
-                startActivity(intent);
-            } else if (position ==  2) {
-                Intent intent = new Intent(getContext(), MemoryCategoryActivity.class);
-                startActivity(intent);
-            }
+        } else if (position ==  1) {
+            Intent intent = new Intent(getBaseContext(), PortugueseCategoryActivity.class);
+            startActivity(intent);
+        } else if (position ==  2) {
+            Intent intent = new Intent(getBaseContext(), MemoryCategoryActivity.class);
+            startActivity(intent);
         }
     }
 }
