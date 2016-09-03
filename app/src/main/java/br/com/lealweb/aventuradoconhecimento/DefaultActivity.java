@@ -25,6 +25,8 @@ public abstract class DefaultActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
                     ClickableScrollerViewPager.OnItemClickListener {
 
+    protected  DrawerLayout drawer;
+
     protected abstract List<String> getTitles();
     protected abstract List<Integer> getBgRes();
 
@@ -73,17 +75,26 @@ public abstract class DefaultActivity extends AppCompatActivity
     }
 
     private void floatingButton() {
-        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toogleMenu(drawer);
+                toogleMenu();
             }
         });
     }
 
-    private void toogleMenu(DrawerLayout drawer) {
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void toogleMenu() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

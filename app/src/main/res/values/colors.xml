@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#607d8b</color>
     <color name="colorPrimaryDark">#455a64</color>
-    <color name="colorPrimaryLight">#cfd8dc</color>
+    <color name="colorPrimaryLight">#e2eaed</color>
     <color name="colorAccent">#ffc107</color>
 
     <color name="white">#ffffff</color>
@@ -16,5 +16,6 @@
     <color name="indicator_2">#64A4A4</color>
     <color name="indicator_3">#66D7B9</color>
     <color name="indicator_4">#FDBC7D</color>
-    <color name="indicator_default_text">#d7f2ff</color>
+
+    <color name="transparent">#00000000</color>
 </resources>
