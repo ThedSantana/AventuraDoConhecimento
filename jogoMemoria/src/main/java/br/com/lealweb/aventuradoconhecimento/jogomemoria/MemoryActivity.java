@@ -26,7 +26,6 @@ public class MemoryActivity extends Activity {
 
 		setupParameters();
 
-		SoundManager.initSounds(this);
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
 		if (savedInstanceState != null) {
@@ -39,30 +38,21 @@ public class MemoryActivity extends Activity {
 
 		GameListener listener = new GameListener() {
 			@Override
-			public void gameOver(MemoryGame game) {
-				// do nothing
-			}
+			public void gameOver(MemoryGame game) {}
 
-			public void gamePaused(MemoryGame game) {
-				// do nothing
-			}
+			public void gamePaused(MemoryGame game) {}
 
-			public void gameResumed(MemoryGame game) {
-				// do nothing
-			}
+			public void gameResumed(MemoryGame game) {}
 
 			@Override
-			public void gameStarted(MemoryGame game) {
-				// do nothing
-			}
+			public void gameStarted(MemoryGame game) {}
 		};
 		game.setListener(listener);
 
 		view = (MemoryView) findViewById(R.id.memoryview);
 
 		if (game.isWaitingForTimeout()) {
-			// game was aborted while waiting for timeout - do it now
-			// slight penalty since full timeout is needed:
+			// retorna contgem tempo caso pausado
 			view.startTimeoutCountdown();
 		}
 	}

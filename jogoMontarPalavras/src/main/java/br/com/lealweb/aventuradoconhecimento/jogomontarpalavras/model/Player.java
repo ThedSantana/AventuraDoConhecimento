@@ -3,7 +3,6 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
 

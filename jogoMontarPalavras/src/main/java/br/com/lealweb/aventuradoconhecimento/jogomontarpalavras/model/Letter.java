@@ -3,13 +3,11 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.Random;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
-import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Letters;
 
 /**
  * Created by leonardoleal on 29/08/16.

@@ -72,12 +72,8 @@ public class Number extends GameObject {
 
     @Override
     public boolean isTouched(MotionEvent event) {
-        if (event.getX() >= x-radius && event.getX() < (x + radius)
-                && event.getY() >= y-radius && event.getY() < (y + radius)
-                ) {
-            return true;
-        }
+        return event.getX() >= x - radius && event.getX() < (x + radius)
+                && event.getY() >= y - radius && event.getY() < (y + radius);
 
-        return false;
     }
 }

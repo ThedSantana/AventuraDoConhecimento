@@ -7,18 +7,17 @@ import java.util.List;
 
 public class MemoryGame implements Serializable {
 
-	public static interface GameListener {
-		public void gameOver(MemoryGame game);
+	public interface GameListener {
+		void gameOver(MemoryGame game);
 
-		public void gamePaused(MemoryGame game);
+		void gamePaused(MemoryGame game);
 
-		public void gameResumed(MemoryGame game);
+		void gameResumed(MemoryGame game);
 
-		public void gameStarted(MemoryGame game);
+		void gameStarted(MemoryGame game);
 	}
 
 	private static final int CLEAR_NOTHING = -3;
-
 	public static final int INT_CLEAR = -2;
 	public static final int INT_UNKNOWN = -1;
 

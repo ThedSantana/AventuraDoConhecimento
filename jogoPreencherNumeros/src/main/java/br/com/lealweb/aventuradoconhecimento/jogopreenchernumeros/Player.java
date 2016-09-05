@@ -42,7 +42,7 @@ public class Player extends GameObject {
     private void createNumbers() {
         Random rand = new Random();
         Point pos;
-        List<Point> listPos = new ArrayList();
+        List<Point> listPos = new ArrayList<>();
         listPos.add(new Point(x+30, y+150));
         listPos.add(new Point(x+40, y+240));
         listPos.add(new Point(x+70, y+85));

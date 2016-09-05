@@ -24,14 +24,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-/**
- * Created by chenupt@gmail.com on 2015/1/31.
- * Description TODO
- */
 public class GuideFragment extends Fragment {
 
     private int bgRes;
-    private ImageView imageView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +43,7 @@ public class GuideFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        imageView = (ImageView) getView().findViewById(R.id.image);
+        ImageView imageView = (ImageView) getView().findViewById(R.id.image);
         imageView.setBackgroundResource(bgRes);
     }
 }

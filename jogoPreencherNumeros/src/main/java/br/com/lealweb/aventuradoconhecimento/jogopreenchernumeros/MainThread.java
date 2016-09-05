@@ -5,9 +5,8 @@ import android.view.SurfaceHolder;
 
 public class MainThread extends Thread {
 
-    private int FPS = 30;
-    private double averageFPS;
-    private SurfaceHolder surfaceHolder;
+    private static final int FPS = 30;
+    private final SurfaceHolder surfaceHolder;
     private GameView gameView;
     private boolean running;
     public static Canvas canvas;
@@ -26,6 +25,7 @@ public class MainThread extends Thread {
         long totalTime = 0;
         int frameCount = 0;
         long targetTime = 1000 / FPS;
+        double averageFPS;
 
         while (running) {
             startTime = System.nanoTime();
@@ -56,6 +56,7 @@ public class MainThread extends Thread {
             try {
                 this.sleep(waitTime);
             } catch (Exception e) {
+                e.printStackTrace();
             }
 
             totalTime += System.nanoTime() - startTime;

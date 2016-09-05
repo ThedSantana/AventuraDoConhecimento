@@ -51,12 +51,8 @@ public abstract class GameObject {
     public abstract void update();
 
     public boolean isTouched(MotionEvent event) {
-        if (event.getX() >= x && event.getX() < (x + width)
-                && event.getY() >= y && event.getY() < (y + height)
-        ) {
-            return true;
-        }
+        return event.getX() >= x && event.getX() < (x + width)
+                && event.getY() >= y && event.getY() < (y + height);
 
-        return false;
     }
 }

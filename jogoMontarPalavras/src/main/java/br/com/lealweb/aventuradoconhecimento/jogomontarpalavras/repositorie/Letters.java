@@ -2,14 +2,10 @@ package br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie;
 
 import android.graphics.Bitmap;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
-import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Figure;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Letter;
 
 /**

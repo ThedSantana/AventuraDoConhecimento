@@ -256,7 +256,7 @@ public class WordView extends View implements Runnable {
             textInput.setText(player.getName());
             textInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)});
             alert.setView(textInput);
-            alert.setPositiveButton("Confirmar", salvarNoRanking(
+            alert.setPositiveButton("Confirmar", saveOnRanking(
                     player.getScore(), player.getName(), db, textInput));
         }
         alert.show();
@@ -265,7 +265,7 @@ public class WordView extends View implements Runnable {
     }
 
     @NonNull
-    private DialogInterface.OnClickListener salvarNoRanking(final int finalScore, final String LAST_NAME_KEY, final HighScoreDatabase db, final EditText textInput) {
+    private DialogInterface.OnClickListener saveOnRanking(final int finalScore, final String LAST_NAME_KEY, final HighScoreDatabase db, final EditText textInput) {
         return new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String value = textInput.getText().toString();
@@ -284,7 +284,6 @@ public class WordView extends View implements Runnable {
     private void showHighScoreDialog() {
         Intent intent = new Intent();
         intent.setClass(getContext(), ListHighScoresActivity.class);
-        intent.putExtra(ListHighScoresActivity.JUST_STORED, true);
         getContext().startActivity(intent);
     }
 

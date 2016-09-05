@@ -15,16 +15,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 import java.util.Timer;
@@ -58,12 +55,12 @@ public class MemoryView extends View {
 
     public MemoryView(Context context, AttributeSet attributes) {
         super(context, attributes);
-        //this.game = ((MemoryActivity) context).game;
 
         MemoryActivity ma = (MemoryActivity) context;
 
         this.game = ma.game;
-        // setOnTouchListener(this);
+
+        SoundManager.initSounds(context);
     }
 
     private GameMetrics computeMetrics() {
@@ -175,7 +172,7 @@ public class MemoryView extends View {
             textInput.setText(initialName);
             textInput.setFilters(new InputFilter[]{new InputFilter.LengthFilter(30)});
             alert.setView(textInput);
-            alert.setPositiveButton("Confirmar", salvarNoRanking(
+            alert.setPositiveButton("Confirmar", saveOnRanking(
                     finalScore, LAST_NAME_KEY, db, textInput));
         }
         alert.show();
@@ -185,7 +182,7 @@ public class MemoryView extends View {
     }
 
     @NonNull
-    private DialogInterface.OnClickListener salvarNoRanking(final int finalScore, final String LAST_NAME_KEY, final HighScoreDatabase db, final EditText textInput) {
+    private DialogInterface.OnClickListener saveOnRanking(final int finalScore, final String LAST_NAME_KEY, final HighScoreDatabase db, final EditText textInput) {
         return new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String value = textInput.getText().toString();
@@ -213,7 +210,6 @@ public class MemoryView extends View {
     private void showHighScoreDialog() {
         Intent intent = new Intent();
         intent.setClass(getContext(), ListHighScoresActivity.class);
-        intent.putExtra(ListHighScoresActivity.JUST_STORED, true);
         getContext().startActivity(intent);
     }
 

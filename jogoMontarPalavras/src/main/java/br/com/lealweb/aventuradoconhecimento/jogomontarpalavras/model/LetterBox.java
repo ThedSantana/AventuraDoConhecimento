@@ -13,7 +13,7 @@ public class LetterBox extends GameObject {
     private Character value;
     private final int letterPosition;
     private final int wordLength;
-    private int letterPadding = 10;
+    private static final int LETTER_PADDING = 10;
 
     private boolean empty = true;
 
@@ -51,7 +51,7 @@ public class LetterBox extends GameObject {
             setX(posX);
             setY((int) ((GameUtil.SCREEN_HEIGHT - getHeight()) * 0.4));
 
-            rectDst.left = getX() + letterPadding;
+            rectDst.left = getX() + LETTER_PADDING;
             rectDst.right = getX() + getWidth();
             rectDst.top = getY();
             rectDst.bottom = getY() + getHeight();
