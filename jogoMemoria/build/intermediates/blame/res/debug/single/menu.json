@@ -1,9 +1,5 @@
 [
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/menu/highscore_menu.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/menu/highscore_menu.xml"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/menu/options_menu.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/menu/options_menu.xml"
     }

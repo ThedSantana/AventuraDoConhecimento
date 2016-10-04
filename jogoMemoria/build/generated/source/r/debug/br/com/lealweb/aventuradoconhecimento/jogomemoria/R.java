@@ -2487,8 +2487,7 @@ containing a value of this type.
         public static int support_simple_spinner_dropdown_item=0x7f030032;
     }
     public static final class menu {
-        public static int highscore_menu=0x7f0d0000;
-        public static int options_menu=0x7f0d0001;
+        public static int options_menu=0x7f0d0000;
     }
     public static final class raw {
         public static int correct=0x7f050000;

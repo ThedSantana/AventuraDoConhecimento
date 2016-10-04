@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -110,6 +111,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_DOWN:
                 if (action.equals(Actions.NEW_GAME)) setNewGame();
 
+
+                return true;
+
+            case MotionEvent.ACTION_UP:
                 if (action.equals(Actions.ROLL_DICE)) {
                     if (!dice.isRolling()) {
                         dice.startRolling();
@@ -119,11 +124,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                         dice2.stopRolling();
                         action = Actions.CHOSSE_NUMBER;
                     }
-                }
-                return true;
-
-            case MotionEvent.ACTION_UP:
-                if (action.equals(Actions.CHOSSE_NUMBER)) {
+                } else if (action.equals(Actions.CHOSSE_NUMBER)) {
                     int result = dice.getResult() + dice2.getResult();
 
                     if (playerTurn.isTouchedNumber(result, event)) {

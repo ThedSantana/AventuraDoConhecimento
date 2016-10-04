@@ -18,10 +18,13 @@ public class ListHighScoresActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		HighScoreDatabase db = HighScoreDatabase.getDatabase(this);
 		final List<String> list = new ArrayList<String>();
-		for (HighScoreEntry entry : db.getSortedHighScores()) {
-			list.add(entry.score + " pontos - " + entry.name);
+
+		HighScoreDatabase db = HighScoreDatabase.getDatabase(this);
+		List<HighScoreEntry> sortedHighScores = db.getSortedHighScores();
+
+		for (HighScoreEntry entry : sortedHighScores) {
+			list.add((sortedHighScores.indexOf(entry) + 1) + " - " + entry.score + " pontos - " + entry.name);
 		}
 
 		setContentView(R.layout.highscorelist);
