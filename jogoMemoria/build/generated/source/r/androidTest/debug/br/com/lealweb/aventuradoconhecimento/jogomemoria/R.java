@@ -810,8 +810,7 @@ public final class R {
 		public static final int support_simple_spinner_dropdown_item = 0x7f030032;
 	}
 	public static final class menu {
-		public static final int highscore_menu = 0x7f0d0000;
-		public static final int options_menu = 0x7f0d0001;
+		public static final int options_menu = 0x7f0d0000;
 	}
 	public static final class raw {
 		public static final int correct = 0x7f050000;

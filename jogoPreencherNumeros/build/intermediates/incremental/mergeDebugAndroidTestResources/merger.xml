@@ -1484,7 +1484,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style><style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/><style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/><string name="action_settings">Configurações</string><dimen name="activity_horizontal_margin">16dp</dimen><string name="app_name">Jogo de Preencher Números</string><dimen name="fab_margin">16dp</dimen><color name="colorPrimaryDark">#303F9F</color><color name="colorPrimary">#3F51B5</color><style name="AppTheme.NoActionBar">
+    </style><style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/><style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/><string name="action_settings">Configurações</string><dimen name="activity_horizontal_margin">0dp</dimen><string name="app_name">Jogo de Preencher Números</string><dimen name="fab_margin">8dp</dimen><color name="colorPrimaryDark">#303F9F</color><color name="colorPrimary">#3F51B5</color><style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style><color name="colorAccent">#FF4081</color></file><file path="/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/bundles/debug/res/values-v21/values-v21.xml" qualifiers="v21"><style name="AppTheme.NoActionBar">

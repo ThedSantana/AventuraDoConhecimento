@@ -18,4 +18,6 @@
     <color name="indicator_4">#FDBC7D</color>
 
     <color name="transparent">#00000000</color>
+
+    <color name="custom_showcase_bg">#b9002153</color>
 </resources>

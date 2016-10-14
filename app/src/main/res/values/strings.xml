@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Aventura do Conhecimento</string>
-    <string name="version">versão: 1.0.0</string>
-    <string name="github">Github\n\nhttps://github.com/leonardoleal/AventuraDoConhecimento</string>
+    <string name="version">versão: beta</string>
+    <string name="github">Github</string>
+    <string name="github_url">https://github.com/leonardoleal/AventuraDoConhecimento</string>
 
 
     <string name="action_settings">Opções</string>
-    <string name="action_about">Sobre</string>
+    <string name="about">Sobre o App</string>
 
     <string name="licenseTitle">Distribuido sob licença\nOpen Source</string>
     <string name="license">
@@ -26,5 +27,16 @@
     <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="close">Fechar</string>
+    <string name="understood">Entendido</string>
+
+    <string name="tutorial_intro">Vou mostrar o que você pode fazer!</string>
+    <string name="tutorial_step_1">Menu geral do aplicativo</string>
+    <string name="tutorial_step_1_description">Neste você encontrá diversas informações sobre o aplicativo. Para fechá-lo, clique fora ou o arraste para a esquerda</string>
+    <string name="tutorial_step_2">Navegue entre as categorias e jogos</string>
+    <string name="tutorial_step_2_description">Para fazer isto, você pode deslizar o dedo para os lados ou clicar neste ícone.</string>
+    <string name="tutorial_step_3">Acesse a categoria ou jogo</string>
+    <string name="tutorial_step_3_description">Toque na tela para entrar na categoria/jogo escolhido.</string>
+    <string name="next">Próximo</string>
+    <string name="help">Ajuda</string>
 </resources>

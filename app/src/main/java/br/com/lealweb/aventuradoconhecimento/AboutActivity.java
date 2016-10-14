@@ -16,7 +16,7 @@ public class AboutActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_about);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        toolbar.setTitle("Sobre o App");
+        toolbar.setTitle(getResources().getString(R.string.about));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
