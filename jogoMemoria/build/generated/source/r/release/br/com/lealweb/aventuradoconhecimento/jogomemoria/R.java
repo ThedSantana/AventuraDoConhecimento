@@ -2293,7 +2293,7 @@ containing a value of this type.
         public static int zoombie=0x7f020062;
     }
     public static final class id {
-        public static int action0=0x7f0c0073;
+        public static int action0=0x7f0c0074;
         public static int action_bar=0x7f0c005a;
         public static int action_bar_activity_content=0x7f0c0000;
         public static int action_bar_container=0x7f0c0059;
@@ -2302,7 +2302,7 @@ containing a value of this type.
         public static int action_bar_subtitle=0x7f0c003b;
         public static int action_bar_title=0x7f0c003a;
         public static int action_context_bar=0x7f0c005b;
-        public static int action_divider=0x7f0c0077;
+        public static int action_divider=0x7f0c0078;
         public static int action_menu_divider=0x7f0c0002;
         public static int action_menu_presenter=0x7f0c0003;
         public static int action_mode_bar=0x7f0c0057;
@@ -2314,12 +2314,12 @@ containing a value of this type.
         public static int beginning=0x7f0c0031;
         public static int bottom=0x7f0c001d;
         public static int buttonPanel=0x7f0c0044;
-        public static int cancel_action=0x7f0c0074;
+        public static int cancel_action=0x7f0c0075;
         public static int center=0x7f0c001e;
         public static int center_horizontal=0x7f0c001f;
         public static int center_vertical=0x7f0c0020;
         public static int checkbox=0x7f0c0052;
-        public static int chronometer=0x7f0c007a;
+        public static int chronometer=0x7f0c007b;
         public static int clip_horizontal=0x7f0c002c;
         public static int clip_vertical=0x7f0c002d;
         public static int collapseActionView=0x7f0c0034;
@@ -2336,7 +2336,7 @@ containing a value of this type.
         public static int disableHome=0x7f0c000e;
         public static int edit_query=0x7f0c005c;
         public static int end=0x7f0c0021;
-        public static int end_padder=0x7f0c007f;
+        public static int end_padder=0x7f0c0080;
         public static int enterAlways=0x7f0c0015;
         public static int enterAlwaysCollapsed=0x7f0c0016;
         public static int exitUntilCollapsed=0x7f0c0017;
@@ -2346,20 +2346,20 @@ containing a value of this type.
         public static int fill_horizontal=0x7f0c002f;
         public static int fill_vertical=0x7f0c0022;
         public static int fixed=0x7f0c0038;
-        public static int highscore_menuitem=0x7f0c0081;
+        public static int highscore_menuitem=0x7f0c0082;
         public static int home=0x7f0c0004;
         public static int homeAsUp=0x7f0c000f;
         public static int icon=0x7f0c0042;
         public static int ifRoom=0x7f0c0035;
         public static int image=0x7f0c003f;
-        public static int info=0x7f0c007e;
+        public static int info=0x7f0c007f;
         public static int item_touch_helper_previous_elevation=0x7f0c0005;
         public static int left=0x7f0c0023;
-        public static int line1=0x7f0c0078;
-        public static int line3=0x7f0c007c;
+        public static int line1=0x7f0c0079;
+        public static int line3=0x7f0c007d;
         public static int listMode=0x7f0c000b;
         public static int list_item=0x7f0c0041;
-        public static int media_actions=0x7f0c0076;
+        public static int media_actions=0x7f0c0077;
         public static int memoryview=0x7f0c0072;
         public static int middle=0x7f0c0032;
         public static int mini=0x7f0c0030;
@@ -2374,8 +2374,9 @@ containing a value of this type.
         public static int progress_circular=0x7f0c0006;
         public static int progress_horizontal=0x7f0c0007;
         public static int radio=0x7f0c0054;
-        public static int restart_menuitem=0x7f0c0080;
+        public static int restart_menuitem=0x7f0c0081;
         public static int right=0x7f0c0024;
+        public static int score=0x7f0c0073;
         public static int screen=0x7f0c0028;
         public static int scroll=0x7f0c0018;
         public static int scrollIndicatorDown=0x7f0c004e;
@@ -2406,13 +2407,13 @@ containing a value of this type.
         public static int src_in=0x7f0c002a;
         public static int src_over=0x7f0c002b;
         public static int start=0x7f0c0025;
-        public static int status_bar_latest_event_content=0x7f0c0075;
+        public static int status_bar_latest_event_content=0x7f0c0076;
         public static int submit_area=0x7f0c0065;
         public static int tabMode=0x7f0c000d;
-        public static int text=0x7f0c007d;
-        public static int text2=0x7f0c007b;
+        public static int text=0x7f0c007e;
+        public static int text2=0x7f0c007c;
         public static int textSpacerNoButtons=0x7f0c004d;
-        public static int time=0x7f0c0079;
+        public static int time=0x7f0c007a;
         public static int title=0x7f0c0043;
         public static int title_template=0x7f0c0048;
         public static int top=0x7f0c0026;
@@ -2472,7 +2473,7 @@ containing a value of this type.
         public static int design_navigation_menu=0x7f030023;
         public static int design_navigation_menu_item=0x7f030024;
         public static int highscorelist=0x7f030025;
-        public static int main=0x7f030026;
+        public static int memory_activity=0x7f030026;
         public static int notification_media_action=0x7f030027;
         public static int notification_media_cancel_action=0x7f030028;
         public static int notification_template_big_media=0x7f030029;

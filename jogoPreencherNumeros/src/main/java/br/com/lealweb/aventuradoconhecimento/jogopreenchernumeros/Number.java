@@ -34,6 +34,11 @@ public class Number extends GameObject {
         paintText.setStrokeWidth(1);
     }
 
+    public Number(int value) {
+        super(null);
+        this.value = value;
+    }
+
     public int getValue() {
         return value;
     }
@@ -75,5 +80,10 @@ public class Number extends GameObject {
         return event.getX() >= x - radius && event.getX() < (x + radius)
                 && event.getY() >= y - radius && event.getY() < (y + radius);
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return getValue() == ((Number) o).getValue();
     }
 }

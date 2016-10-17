@@ -25,21 +25,21 @@ public class Player {
 
     public void drawScore(Canvas canvas) {
         Paint paintText = new Paint();
-        paintText.setTextSize(20 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO);
+        paintText.setTextSize(30 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO);
         paintText.setFakeBoldText(true);
         paintText.setColor(Color.BLACK);
 
         canvas.drawText(
                 "Pontos",
-                10 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO,
-                20 * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO,
+                15 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO,
+                35 * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO,
                 paintText
         );
 
         canvas.drawText(
                 String.valueOf(score),
-                10 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO,
-                40 * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO,
+                15 * GameUtil.SCREEN_WIDTH / GameUtil.SCREEN_WIDTH_RATIO,
+                70 * GameUtil.SCREEN_HEIGHT / GameUtil.SCREEN_HEIGHT_RATIO,
                 paintText
         );
     }

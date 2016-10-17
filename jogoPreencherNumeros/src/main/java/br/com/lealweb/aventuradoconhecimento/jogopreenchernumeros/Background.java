@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-public class Background extends GameObject{
+public class Background extends GameObject {
 
     public Background(Context context) {
         super(context);

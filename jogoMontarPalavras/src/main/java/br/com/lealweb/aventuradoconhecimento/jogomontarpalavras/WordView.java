@@ -50,8 +50,12 @@ public class WordView extends View implements Runnable {
     private Letter letterToMove;
     private Player player;
 
+    private WordActivity wa;
+
     public WordView(Context context) {
         super(context);
+
+        wa = (WordActivity) context;
 
         init();
     }

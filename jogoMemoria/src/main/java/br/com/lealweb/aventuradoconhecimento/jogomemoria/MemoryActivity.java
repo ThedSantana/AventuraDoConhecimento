@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryGame.GameListener;
 
@@ -34,7 +35,7 @@ public class MemoryActivity extends Activity {
 		if (game == null) {
 			game = new MemoryGame(6, 6);
 		}
-		setContentView(R.layout.main);
+		setContentView(R.layout.memory_activity);
 
 		GameListener listener = new GameListener() {
 			@Override
@@ -108,4 +109,8 @@ public class MemoryActivity extends Activity {
 		outState.putSerializable(GAME_KEY, game);
 	}
 
+	public void updateScore(int score) {
+		TextView TVScore = (TextView) findViewById(R.id.score);
+		TVScore.setText("Pontos \n" + String.valueOf(score));
+	}
 }

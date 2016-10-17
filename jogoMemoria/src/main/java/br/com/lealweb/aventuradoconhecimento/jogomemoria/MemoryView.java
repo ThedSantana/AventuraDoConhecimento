@@ -19,10 +19,12 @@ import android.support.annotation.NonNull;
 import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,11 +54,12 @@ public class MemoryView extends View {
     private Bitmap[] tiles;
     final Timer timer = new Timer(true);
     private Bitmap unknownBitmap;
+    private MemoryActivity ma;
 
     public MemoryView(Context context, AttributeSet attributes) {
         super(context, attributes);
 
-        MemoryActivity ma = (MemoryActivity) context;
+        ma = (MemoryActivity) context;
 
         this.game = ma.game;
 
@@ -123,24 +126,7 @@ public class MemoryView extends View {
     }
 
     private void drawScore(Canvas canvas) {
-        Paint paintText = new Paint();
-        paintText.setTextSize(20 * metrics.SCREEN_WIDTH / metrics.SCREEN_WIDTH_RATIO);
-        paintText.setFakeBoldText(true);
-        paintText.setColor(Color.WHITE);
-
-        canvas.drawText(
-                "Pontos",
-                10 * metrics.SCREEN_WIDTH / metrics.SCREEN_WIDTH_RATIO,
-                20 * metrics.SCREEN_HEIGHT / metrics.SCREEN_HEIGHT_RATIO,
-                paintText
-        );
-
-        canvas.drawText(
-                String.valueOf(game.getScore()),
-                10 * metrics.SCREEN_WIDTH / metrics.SCREEN_WIDTH_RATIO,
-                40 * metrics.SCREEN_HEIGHT / metrics.SCREEN_HEIGHT_RATIO,
-                paintText
-        );
+        ma.updateScore(game.getScore());
     }
 
     void gameOver() {

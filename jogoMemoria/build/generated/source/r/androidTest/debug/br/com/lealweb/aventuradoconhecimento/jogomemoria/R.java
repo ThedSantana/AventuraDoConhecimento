@@ -795,7 +795,7 @@ public final class R {
 		public static final int design_navigation_menu = 0x7f030023;
 		public static final int design_navigation_menu_item = 0x7f030024;
 		public static final int highscorelist = 0x7f030025;
-		public static final int main = 0x7f030026;
+		public static final int memory_activity = 0x7f030026;
 		public static final int notification_media_action = 0x7f030027;
 		public static final int notification_media_cancel_action = 0x7f030028;
 		public static final int notification_template_big_media = 0x7f030029;

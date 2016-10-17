@@ -77,6 +77,6 @@ public class SoundManager {
 
 	@SuppressWarnings("deprecation")
 	private static SoundPool createOldSoundPool(){
-		return new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+		return new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
 	}
 }

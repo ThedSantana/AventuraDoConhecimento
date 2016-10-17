@@ -2472,7 +2472,7 @@ containing a value of this type.
         public static int design_navigation_menu=0x7f030023;
         public static int design_navigation_menu_item=0x7f030024;
         public static int highscorelist=0x7f030025;
-        public static int main=0x7f030026;
+        public static int memory_activity =0x7f030026;
         public static int notification_media_action=0x7f030027;
         public static int notification_media_cancel_action=0x7f030028;
         public static int notification_template_big_media=0x7f030029;
