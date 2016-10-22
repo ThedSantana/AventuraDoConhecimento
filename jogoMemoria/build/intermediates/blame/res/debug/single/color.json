@@ -28,12 +28,12 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/switch_thumb_material_dark.xml"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/color/switch_thumb_material_light.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/color/switch_thumb_material_dark.xml",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/color/switch_thumb_material_dark.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/color/abc_primary_text_material_light.xml",

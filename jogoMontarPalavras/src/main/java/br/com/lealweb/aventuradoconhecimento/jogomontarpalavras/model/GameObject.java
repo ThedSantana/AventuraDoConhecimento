@@ -8,15 +8,12 @@ import java.io.Serializable;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
 
-/**
- * Created by leonardoleal on 28/08/16.
- */
 public abstract class GameObject implements Serializable {
 
     private static final String TAG = "GameObject";
 
-    private int x;
-    private int y;
+    private int x = 0;
+    private int y = 0;
     private int width;
     private int height;
     protected Bitmap imageResource;
@@ -29,8 +26,12 @@ public abstract class GameObject implements Serializable {
     public abstract void draw(Canvas canvas);
 
     public void updateDistortion() {
-        width = (int) (width * GameUtil.DISTORTION);
-        height = (int) (height * GameUtil.DISTORTION);
+        updateDistortion(GameUtil.DISTORTION);
+    }
+
+    public void updateDistortion(float distortion) {
+        width = (int) (width * distortion);
+        height = (int) (height * distortion);
     }
 
     public boolean isTouched(double xCord, double yCord) {

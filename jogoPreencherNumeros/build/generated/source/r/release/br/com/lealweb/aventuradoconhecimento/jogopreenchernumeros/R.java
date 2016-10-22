@@ -2506,10 +2506,10 @@ containing a value of this type.
         public static int app_name=0x7f060015;
         public static int appbar_scrolling_view_behavior=0x7f060016;
         public static int bottom_sheet_behavior=0x7f060017;
-        public static int changeDificultyDialog=0x7f060018;
+        public static int change_dificulty_dialog=0x7f060018;
         public static int character_counter_pattern=0x7f060019;
-        public static int exitDialog=0x7f06001a;
-        public static int newGameDialog=0x7f06001b;
+        public static int exit_dialog=0x7f06001a;
+        public static int new_game_dialog=0x7f06001b;
         public static int no=0x7f06001c;
         public static int status_bar_notification_info_overflow=0x7f060013;
         public static int yes=0x7f06001d;

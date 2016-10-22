@@ -4,13 +4,12 @@ import android.graphics.Bitmap;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.GameUtil;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Letter;
 
-/**
- * Created by leonardoleal on 28/08/16.
- */
 public class Letters {
 
     private static final String TAG = "repositorie.Letters";
@@ -50,5 +49,15 @@ public class Letters {
 
     public Letter getLetterByValue(Character c) {
         return new Letter(c, letters.get(c));
+    }
+
+    public Letter getRandomLetter() {
+        Set<Character> keysSet = letters.keySet();
+        Character[] keys = new Character[letters.size()];
+        keysSet.toArray(keys);
+
+        Random random = new Random();
+
+        return getLetterByValue(keys[random.nextInt(letters.size())]);
     }
 }

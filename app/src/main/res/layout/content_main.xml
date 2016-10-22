@@ -15,7 +15,7 @@
         android:layout_gravity="bottom|left"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/transparent"
-        android:src="@drawable/jpn_dificulty"
+        android:src="@drawable/cog"
         android:scaleType="center" />
 
 </android.support.design.widget.CoordinatorLayout>

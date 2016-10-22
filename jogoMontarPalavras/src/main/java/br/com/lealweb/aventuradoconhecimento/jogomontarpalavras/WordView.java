@@ -13,49 +13,57 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Background;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.DificultyIcon;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.ExitIcon;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Figure;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Letter;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.LetterBox;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.model.Player;
+import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Dificulty;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Figuries;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.HighScoreDatabase;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Letters;
 import br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.SoundManager;
 
-/**
- * Created by leonardoleal on 28/08/16.
- */
+import static br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Dificulty.DOUBLE_LETTERS;
+import static br.com.lealweb.aventuradoconhecimento.jogomontarpalavras.repositorie.Dificulty.ONLY_WORD;
+
 public class WordView extends View implements Runnable {
 
     private static final String TAG = "WordView";
 
     private boolean running;
     private boolean update;
+    private boolean needShowDialog = true;
+    private boolean canStartNewGame;
+    private WordActivity wordActivity;
+
     private Background bg;
+    private Player player;
+
+    private Figure actualFigure;
+    private List<LetterBox> emptyBoxes;
+
+    private List<Letter> letterBoxes;
+    private Letter letterToMove;
+
+    private ExitIcon exitIcon;
+    private DificultyIcon dificultyIcon;
 
     // repositories
     private Letters letters;
     private Figuries figuries;
-
-    private Figure actualFigure;
-    private List<LetterBox> emptyBoxes;
-    private List<Letter> letterBoxes;
-
-    private Letter letterToMove;
-    private Player player;
-
-    private WordActivity wa;
+    private Dificulty dificulty;
 
     public WordView(Context context) {
         super(context);
 
-        wa = (WordActivity) context;
+        wordActivity = (WordActivity) context;
 
         init();
     }
@@ -68,23 +76,24 @@ public class WordView extends View implements Runnable {
         bg = new Background();
         GameUtil.DISTORTION =
                 (float) GameUtil.SCREEN_WIDTH / bg.getWidth();
-        bg.updateDistortion();
+        bg.updateDistortion(GameUtil.DISTORTION);
 
         SoundManager.initSounds(getContext());
 
+        exitIcon = new ExitIcon();
+        dificultyIcon = new DificultyIcon();
+
+        dificulty = ONLY_WORD;
+
         newGame();
-        newTurn();
     }
 
     private void newGame() {
         figuries = new Figuries();
         letters = new Letters();
         player = new Player();
-    }
 
-    private void gameRestart() {
-        figuries = new Figuries();
-        player.setScore(0);
+        newTurn();
     }
 
     private void newTurn() {
@@ -98,12 +107,28 @@ public class WordView extends View implements Runnable {
             for (int pos = 0; pos < wordLetters.length; pos++) {
                 generateEmptyBoxes(wordLetters, pos);
                 generateLetterBoxes(wordLetters, pos);
-                // TODO adiciona letras aleatórias --QUANDO TIVER DIFICULDADE
+
+                if (dificulty.equals(DOUBLE_LETTERS)) {
+                    generateRandomLetterBoxes();
+                }
             }
         } catch (Exception e) {
             Log.e(TAG, "Erro ao iniciar novo turno");
             e.printStackTrace();
         }
+    }
+
+    private void changeDificulty() {
+        switch (dificulty) {
+            case ONLY_WORD:
+                dificulty = DOUBLE_LETTERS;
+                break;
+
+            case DOUBLE_LETTERS:
+                dificulty = ONLY_WORD;
+                break;
+        }
+        newGame();
     }
 
     private void generateEmptyBoxes(char[] wordLetters, int pos) {
@@ -122,16 +147,38 @@ public class WordView extends View implements Runnable {
                 if (l.isTouched(letter.getX(), letter.getY())) {
                     isOnEmptySpace = false;
                 }
-                //Log.d(letter.toString(), l.toString());
             }
+
         } while (! isOnEmptySpace);
 
         letterBoxes.add(letter);
     }
 
+    private void generateRandomLetterBoxes() {
+        boolean isOnEmptySpace;
+        Letter letter;
+        do {
+            isOnEmptySpace = true;
+
+            letter = letters.getRandomLetter();
+
+            for (Letter l: letterBoxes) {
+                if (l.isTouched(letter.getX(), letter.getY())) {
+                    isOnEmptySpace = false;
+                }
+            }
+
+        } while (! isOnEmptySpace);
+
+        letterBoxes.add(letter);
+    }
+
+
     public void update() {
         if (update) {
             bg.update();
+            dificultyIcon.update();
+            exitIcon.update();
             actualFigure.update();
 
             for (LetterBox lb : emptyBoxes) {
@@ -146,6 +193,8 @@ public class WordView extends View implements Runnable {
 
     protected void onDraw(Canvas canvas) {
         bg.draw(canvas);
+        dificultyIcon.draw(canvas);
+        exitIcon.draw(canvas);
         actualFigure.draw(canvas);
 
         for (LetterBox lb : emptyBoxes) {
@@ -182,6 +231,24 @@ public class WordView extends View implements Runnable {
             break;
 
             case MotionEvent.ACTION_UP: {
+
+                if (exitIcon.isTouched(event.getX(), event.getY())) {
+                    new ConfirmDialog(getContext(), dialogExitListener)
+                            .show(getResources().getString(R.string.exit_dialog));
+                    return true;
+                }
+
+                if (dificultyIcon.isTouched(event.getX(), event.getY())) {
+                    if (needShowDialog) {
+                        new ConfirmDialog(getContext(), dialogChangeDificultyListener)
+                                .show(getResources().getString(R.string.change_dificulty_dialog));
+                    } else {
+                        changeDificulty();
+                    }
+                    return true;
+                }
+                needShowDialog = true;
+
                 if (letterToMove != null) {
                     for (LetterBox lB : emptyBoxes) {
                         if (lB.isTouched(event.getX(), event.getY())
@@ -200,16 +267,10 @@ public class WordView extends View implements Runnable {
                                     SoundManager.playGameDone();
 
                                     if (gameOver()) {
-                                        // game score
-                                        Toast.makeText(getContext(),
-                                                "Fim de jogo. Pontos: " + player.getScore(),
-                                                Toast.LENGTH_SHORT).show();
-                                        gameFinish();
-
-                                        gameRestart();
+                                        finishGame();
+                                    } else {
+                                        newTurn();
                                     }
-
-                                    newTurn();
                                 }
 
                             } else {
@@ -225,6 +286,9 @@ public class WordView extends View implements Runnable {
                         letterToMove.drop(true);
                     }
                     letterToMove = null;
+                } else if (canStartNewGame) {
+                    new ConfirmDialog(getContext(), dialogNewGameListener)
+                            .show(getResources().getString(R.string.new_game_dialog));
                 }
             }
             break;
@@ -235,10 +299,16 @@ public class WordView extends View implements Runnable {
     private boolean gameOver() { return figuries.isEmpty(); }
 
     private boolean wordCompleted() {
-        return letterBoxes.isEmpty();
+        for (LetterBox box: emptyBoxes) {
+            if (box.isEmpty())
+                return false;
+        }
+        return true;
     }
 
-    private void gameFinish() {
+    private void finishGame() {
+        canStartNewGame = true;
+
         SharedPreferences prefs = ((Activity) getContext()).getPreferences(Context.MODE_PRIVATE);
         player.setName(prefs.getString("last_name", ""));
 
@@ -290,6 +360,49 @@ public class WordView extends View implements Runnable {
         intent.setClass(getContext(), ListHighScoresActivity.class);
         getContext().startActivity(intent);
     }
+
+    DialogInterface.OnClickListener dialogChangeDificultyListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    changeDificulty();
+                    needShowDialog = false;
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
+
+    DialogInterface.OnClickListener dialogNewGameListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    newGame();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
+
+    DialogInterface.OnClickListener dialogExitListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    wordActivity.finish();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
 
     @Override
     public void run() {

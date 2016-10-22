@@ -8,9 +8,9 @@
     <dimen name="fab_margin">8dp</dimen>
     <string name="action_settings">Configurações</string>
     <string name="app_name">Jogo de Preencher Números</string>
-    <string name="changeDificultyDialog">Deseja alterar a dificuldade e iniciar um novo jogo?</string>
-    <string name="exitDialog">Deseja sair do jogo?</string>
-    <string name="newGameDialog">Deseja iniciar um novo jogo?</string>
+    <string name="change_dificulty_dialog">Deseja alterar a dificuldade e iniciar um novo jogo?</string>
+    <string name="exit_dialog">Deseja sair do jogo?</string>
+    <string name="new_game_dialog">Deseja iniciar um novo jogo?</string>
     <string name="no">Não</string>
     <string name="yes">Sim</string>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">

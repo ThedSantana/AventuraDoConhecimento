@@ -64,12 +64,12 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/design/23.2.1/res/layout/design_menu_item_action_area.xml"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/abc_action_bar_up_container.xml"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/design_navigation_item_separator.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/design/23.2.1/res/layout/design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
@@ -118,6 +118,10 @@
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/memory_activity.xml",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/layout/memory_activity.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
@@ -174,10 +178,6 @@
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/layout/abc_action_bar_title_item.xml"
-    },
-    {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/main.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/layout/main.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/layout/abc_alert_dialog_button_bar_material.xml",

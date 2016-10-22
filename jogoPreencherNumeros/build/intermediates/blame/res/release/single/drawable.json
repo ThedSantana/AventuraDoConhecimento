@@ -100,12 +100,12 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_indicator_material.xml"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/release/drawable/abc_seekbar_track_material.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_seekbar_track_material.xml"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/release/drawable/design_fab_background.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/design/23.2.1/res/drawable/design_fab_background.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/release/drawable/abc_seekbar_track_material.xml",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_seekbar_track_material.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoPreencherNumeros/build/intermediates/res/merged/release/drawable/abc_seekbar_thumb_material.xml",

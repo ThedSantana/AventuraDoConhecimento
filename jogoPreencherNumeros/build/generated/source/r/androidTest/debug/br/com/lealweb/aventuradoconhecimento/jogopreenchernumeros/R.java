@@ -602,10 +602,12 @@ public final class R {
 		public static final int jpn_dice_4 = 0x7f020052;
 		public static final int jpn_dice_5 = 0x7f020053;
 		public static final int jpn_dice_6 = 0x7f020054;
-		public static final int jpn_player1_elephant = 0x7f020055;
-		public static final int jpn_player2_elephant = 0x7f020056;
-		public static final int notification_template_icon_bg = 0x7f020058;
-		public static final int number_game_icon = 0x7f020057;
+		public static final int jpn_dificulty = 0x7f020055;
+		public static final int jpn_exit = 0x7f020056;
+		public static final int jpn_player1_elephant = 0x7f020057;
+		public static final int jpn_player2_elephant = 0x7f020058;
+		public static final int notification_template_icon_bg = 0x7f02005a;
+		public static final int number_game_icon = 0x7f020059;
 	}
 	public static final class id {
 		public static final int action0 = 0x7f0c0072;
@@ -623,7 +625,6 @@ public final class R {
 		public static final int action_mode_bar = 0x7f0c0057;
 		public static final int action_mode_bar_stub = 0x7f0c0056;
 		public static final int action_mode_close_button = 0x7f0c003c;
-		public static final int action_settings = 0x7f0c007f;
 		public static final int activity_chooser_view_content = 0x7f0c003d;
 		public static final int alertTitle = 0x7f0c0049;
 		public static final int always = 0x7f0c0033;
@@ -797,9 +798,6 @@ public final class R {
 		public static final int select_dialog_singlechoice_material = 0x7f03002f;
 		public static final int support_simple_spinner_dropdown_item = 0x7f030030;
 	}
-	public static final class menu {
-		public static final int menu_game = 0x7f0d0000;
-	}
 	public static final class raw {
 		public static final int correct = 0x7f050000;
 		public static final int dice_shake = 0x7f050001;
@@ -831,8 +829,13 @@ public final class R {
 		public static final int app_name = 0x7f060015;
 		public static final int appbar_scrolling_view_behavior = 0x7f060016;
 		public static final int bottom_sheet_behavior = 0x7f060017;
-		public static final int character_counter_pattern = 0x7f060018;
+		public static final int change_dificulty_dialog = 0x7f060018;
+		public static final int character_counter_pattern = 0x7f060019;
+		public static final int exit_dialog = 0x7f06001a;
+		public static final int new_game_dialog = 0x7f06001b;
+		public static final int no = 0x7f06001c;
 		public static final int status_bar_notification_info_overflow = 0x7f060013;
+		public static final int yes = 0x7f06001d;
 	}
 	public static final class style {
 		public static final int AlertDialog_AppCompat = 0x7f090088;

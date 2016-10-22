@@ -24,12 +24,12 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/abobora.png"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/frankestein.png",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/frankestein.png"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_light.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/frankestein.png",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/frankestein.png"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_edit_text_material.xml",
@@ -96,12 +96,12 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/gato_preto.png"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_switch_thumb_material.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_list_selector_background_transition_holo_light.xml",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_list_selector_background_transition_holo_light.xml"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_ratingbar_small_material.xml",
