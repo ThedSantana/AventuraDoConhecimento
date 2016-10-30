@@ -48,6 +48,10 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_spinner_textfield_background_material.xml"
     },
     {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/jm_dificulty.png",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/jm_dificulty.png"
+    },
+    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/memory_game_icon.png",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/memory_game_icon.png"
     },
@@ -82,10 +86,6 @@
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_ratingbar_full_material.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_full_material.xml"
-    },
-    {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/cog.png",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/cog.png"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/gremlin.png",
@@ -194,6 +194,10 @@
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/robo.png",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/robo.png"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/jm_exit.png",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/jm_exit.png"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/debug/drawable/abc_btn_radio_material.xml",

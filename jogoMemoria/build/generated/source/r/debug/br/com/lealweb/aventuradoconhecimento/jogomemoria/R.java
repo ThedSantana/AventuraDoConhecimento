@@ -2274,23 +2274,24 @@ containing a value of this type.
         public static int card=0x7f020050;
         public static int casa_assombrada=0x7f020051;
         public static int ciclope=0x7f020052;
-        public static int cog=0x7f020053;
-        public static int design_fab_background=0x7f020054;
-        public static int design_snackbar_background=0x7f020055;
-        public static int dragao=0x7f020056;
-        public static int fantasma=0x7f020057;
-        public static int frankestein=0x7f020058;
-        public static int gato_preto=0x7f020059;
-        public static int godzzila=0x7f02005a;
-        public static int gremlin=0x7f02005b;
-        public static int medusa=0x7f02005c;
-        public static int memory_game_icon=0x7f02005d;
-        public static int mumia=0x7f02005e;
-        public static int notification_template_icon_bg=0x7f020063;
-        public static int raio=0x7f02005f;
-        public static int robo=0x7f020060;
-        public static int vampiro=0x7f020061;
-        public static int zoombie=0x7f020062;
+        public static int design_fab_background=0x7f020053;
+        public static int design_snackbar_background=0x7f020054;
+        public static int dragao=0x7f020055;
+        public static int fantasma=0x7f020056;
+        public static int frankestein=0x7f020057;
+        public static int gato_preto=0x7f020058;
+        public static int godzzila=0x7f020059;
+        public static int gremlin=0x7f02005a;
+        public static int jm_dificulty=0x7f02005b;
+        public static int jm_exit=0x7f02005c;
+        public static int medusa=0x7f02005d;
+        public static int memory_game_icon=0x7f02005e;
+        public static int mumia=0x7f02005f;
+        public static int notification_template_icon_bg=0x7f020064;
+        public static int raio=0x7f020060;
+        public static int robo=0x7f020061;
+        public static int vampiro=0x7f020062;
+        public static int zoombie=0x7f020063;
     }
     public static final class id {
         public static int action0=0x7f0c0074;
@@ -2520,11 +2521,16 @@ containing a value of this type.
         public static int app_name=0x7f060015;
         public static int appbar_scrolling_view_behavior=0x7f060016;
         public static int bottom_sheet_behavior=0x7f060017;
-        public static int character_counter_pattern=0x7f060018;
-        public static int highscore_menuitem_text=0x7f060019;
-        public static int no_high_score=0x7f06001a;
-        public static int restart_menuitem_text=0x7f06001b;
+        public static int change_dificulty_dialog=0x7f060018;
+        public static int character_counter_pattern=0x7f060019;
+        public static int exit_dialog=0x7f06001a;
+        public static int highscore_menuitem_text=0x7f06001b;
+        public static int new_game_dialog=0x7f06001c;
+        public static int no=0x7f06001d;
+        public static int no_high_score=0x7f06001e;
+        public static int restart_menuitem_text=0x7f06001f;
         public static int status_bar_notification_info_overflow=0x7f060013;
+        public static int yes=0x7f060020;
     }
     public static final class style {
         public static int AlertDialog_AppCompat=0x7f090087;

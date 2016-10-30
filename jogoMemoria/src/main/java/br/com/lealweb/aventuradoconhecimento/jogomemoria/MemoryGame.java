@@ -5,51 +5,58 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.com.lealweb.aventuradoconhecimento.jogomemoria.repositorie.Dificulty;
+
 public class MemoryGame implements Serializable {
 
 	public interface GameListener {
-		void gameOver(MemoryGame game);
 
+		void gameOver(MemoryGame game);
 		void gamePaused(MemoryGame game);
 
 		void gameResumed(MemoryGame game);
 
 		void gameStarted(MemoryGame game);
-	}
 
+	}
 	private static final int CLEAR_NOTHING = -3;
+
 	public static final int INT_CLEAR = -2;
 	public static final int INT_UNKNOWN = -1;
-
 	private static final long serialVersionUID = 0L;
 
 	private int clickX = -1;
+
 	private int clickY = -1;
+	public int[][] displayedBoard;
 
-	public final int[][] displayedBoard;
-	private final int[][] gameBoard;
+	private int[][] gameBoard;
+	public int height;
+	public int width;
+	private int amountOfCards;
+	private Dificulty dificulty;
 
-	public final int height;
 	private transient GameListener listener;
 	private int objectToClearAfterTimeout = -1;
+	private boolean waitingForTimeout = false;
 	private boolean paused = true;
 	private boolean started = false;
-
 	private long startTime = -1; // set on start
+
 	private long storedTime = 0;
-	private boolean waitingForTimeout = false;
 
 	private int score = 0;
 
-	public final int width;
+	public MemoryGame(Dificulty dificulty) {
+		setDificulty(dificulty);
 
-	public MemoryGame(int width, int height) {
+		setup();
+		shuffle();
+	}
+
+	private void setup() {
 		this.gameBoard = new int[width][height];
 		this.displayedBoard = new int[width][height];
-		this.width = width;
-		this.height = height;
-
-		shuffle();
 	}
 
 	public void afterTimeout() {
@@ -66,8 +73,8 @@ public class MemoryGame implements Serializable {
 		waitingForTimeout = false;
 	}
 
-	/** Return wheter something changed (click was "accepted"). */
-	public boolean click(int x, int y) {
+	/** Return wheter something changed (clickOnCard was "accepted"). */
+	public boolean clickOnCard(int x, int y) {
 		if (paused || !started)
 			return false;
 		int clickedObject = displayedBoard[x][y];
@@ -137,12 +144,15 @@ public class MemoryGame implements Serializable {
 	}
 
 	public void restart() {
+		setup();
+
 		listener.gameOver(this);
 		clickX = clickY = -1;
 		started = false;
 		paused = true;
 		storedTime = 0;
 		score = 0;
+
 		shuffle();
 	}
 
@@ -184,6 +194,47 @@ public class MemoryGame implements Serializable {
 		listener.gameStarted(this);
 	}
 
+	public void changeDificulty() {
+		switch (dificulty) {
+			case EASY:
+				dificulty = Dificulty.NORMAL;
+				break;
+
+			case NORMAL:
+				dificulty = Dificulty.HARD;
+				break;
+
+			case HARD:
+				dificulty = Dificulty.EASY;
+		}
+		setDificulty(dificulty);
+	}
+
+	public void setDificulty(Dificulty dificulty) {
+		this.dificulty = dificulty;
+		switch (dificulty) {
+			case EASY:
+				width = 2;
+				height = 4;
+				break;
+
+			case NORMAL:
+				width = 4;
+				height = 5;
+				break;
+
+			case HARD:
+				width = 6;
+				height = 6;
+		}
+
+		calculateAmountOfCards();
+	}
+
+	private void calculateAmountOfCards() {
+		amountOfCards = width * height / 2;
+	}
+
 	public boolean wasLastClickIncorrect() {
 		return objectToClearAfterTimeout == CLEAR_NOTHING;
 	}
@@ -198,5 +249,9 @@ public class MemoryGame implements Serializable {
 
 	public int getScore() {
 		return score;
+	}
+
+	public int getAmountOfCards() {
+		return amountOfCards;
 	}
 }

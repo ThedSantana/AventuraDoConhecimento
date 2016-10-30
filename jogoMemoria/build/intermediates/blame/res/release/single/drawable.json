@@ -72,10 +72,6 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_text_cursor_material.xml"
     },
     {
-        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/cog.png",
-        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/cog.png"
-    },
-    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/design_fab_background.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/design/23.2.1/res/drawable/design_fab_background.xml"
     },
@@ -112,6 +108,10 @@
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/mumia.png"
     },
     {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/jm_exit.png",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/jm_exit.png"
+    },
+    {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/abc_item_background_holo_light.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_item_background_holo_light.xml"
     },
@@ -134,6 +134,10 @@
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/abc_ratingbar_indicator_material.xml",
         "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.2.1/res/drawable/abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/jm_dificulty.png",
+        "source": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/src/main/res/drawable/jm_dificulty.png"
     },
     {
         "merged": "/media/files/projetos/Android/AventuraDoConhecimento/jogoMemoria/build/intermediates/res/merged/release/drawable/abc_tab_indicator_material.xml",

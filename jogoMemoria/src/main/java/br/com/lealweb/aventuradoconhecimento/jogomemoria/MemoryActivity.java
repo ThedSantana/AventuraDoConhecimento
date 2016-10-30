@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import br.com.lealweb.aventuradoconhecimento.jogomemoria.MemoryGame.GameListener;
+import br.com.lealweb.aventuradoconhecimento.jogomemoria.repositorie.Dificulty;
 
 public class MemoryActivity extends Activity {
 
@@ -33,7 +34,7 @@ public class MemoryActivity extends Activity {
 			game = (MemoryGame) savedInstanceState.getSerializable(GAME_KEY);
 		}
 		if (game == null) {
-			game = new MemoryGame(6, 6);
+			game = new MemoryGame(Dificulty.NORMAL);
 		}
 		setContentView(R.layout.memory_activity);
 

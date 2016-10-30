@@ -5,4 +5,9 @@
     <string name="highscore_menuitem_text">Ranking</string>
     <string name="no_high_score">Nenhuma pontuação ainda!</string>
     <string name="action_settings">Configurações</string>
+    <string name="change_dificulty_dialog">Deseja alterar a dificuldade e iniciar um novo jogo?</string>
+    <string name="new_game_dialog">Deseja iniciar um novo jogo?</string>
+    <string name="exit_dialog">Deseja sair do jogo?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 </resources>

@@ -14,7 +14,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.text.InputFilter;
 import android.util.AttributeSet;
@@ -24,28 +23,33 @@ import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+import br.com.lealweb.aventuradoconhecimento.jogomemoria.model.DificultyIcon;
+import br.com.lealweb.aventuradoconhecimento.jogomemoria.model.ExitIcon;
+import br.com.lealweb.aventuradoconhecimento.jogomemoria.repositorie.Dificulty;
+
 public class MemoryView extends View {
 
-    static class GameMetrics {
-        public static final int SCREEN_WIDTH_RATIO = 1000;
-        public static final int SCREEN_HEIGHT_RATIO = 600;
+    public static class GameMetrics {
 
+        public static final int SCREEN_WIDTH_RATIO = 1000;
+
+        public static final int SCREEN_HEIGHT_RATIO = 600;
         public static int SCREEN_WIDTH;
         public static int SCREEN_HEIGHT;
 
         int boardHeight;
-
         int boardWidth;
-        int offsetX;
-        int offsetY;
 
+        int offsetX;
+
+        int offsetY;
         int paddingBetweenTiles;
         int tileSize;
+
     }
 
     private Bitmap clearBitmap;
@@ -56,12 +60,18 @@ public class MemoryView extends View {
     private Bitmap unknownBitmap;
     private MemoryActivity ma;
 
+    private boolean needShowDialog = true;
+    private DificultyIcon dificultyIcon;
+    private ExitIcon exitIcon;
+
     public MemoryView(Context context, AttributeSet attributes) {
         super(context, attributes);
 
         ma = (MemoryActivity) context;
 
         this.game = ma.game;
+        this.dificultyIcon = new DificultyIcon(context);
+        this.exitIcon = new ExitIcon(context);
 
         SoundManager.initSounds(context);
     }
@@ -103,7 +113,12 @@ public class MemoryView extends View {
         super.draw(canvas);
         canvas.setDensity(Bitmap.DENSITY_NONE);
 
-        //drawSettingsCog(canvas);
+        dificultyIcon.update();
+        dificultyIcon.draw(canvas);
+
+        exitIcon.update();
+        exitIcon.draw(canvas);
+        
         drawCards(canvas);
         drawScore(canvas);
     }
@@ -120,13 +135,19 @@ public class MemoryView extends View {
         }
     }
 
-    private void drawSettingsCog(Canvas canvas) {
-        canvas.drawBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.cog),
-                getWidth() - 50, 10, null);
-    }
-
     private void drawScore(Canvas canvas) {
         ma.updateScore(game.getScore());
+    }
+
+    private void changeDificulty() {
+        game.changeDificulty();
+        newGame();
+    }
+
+    private void newGame() {
+        game.restart();
+        onSizeChanged(getWidth(), getHeight(), getWidth(), getHeight());
+        invalidate();
     }
 
     void gameOver() {
@@ -163,7 +184,6 @@ public class MemoryView extends View {
         }
         alert.show();
 
-        game.restart();
         invalidate();
     }
 
@@ -184,20 +204,54 @@ public class MemoryView extends View {
         };
     }
 
-    private DialogInterface.OnClickListener fecharApp() {
-        return new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                ((Activity) getContext()).finish();
-            }
-        };
-    }
-
     private void showHighScoreDialog() {
         Intent intent = new Intent();
         intent.setClass(getContext(), ListHighScoresActivity.class);
         getContext().startActivity(intent);
     }
+
+    DialogInterface.OnClickListener dialogChangeDificultyListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    changeDificulty();
+                    needShowDialog = false;
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
+
+    DialogInterface.OnClickListener dialogNewGameListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    newGame();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
+
+    DialogInterface.OnClickListener dialogExitListener = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    ma.finish();
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    break;
+            }
+        }
+    };
 
     private Bitmap getBitmapFromIndex(int index) {
         switch (index) {
@@ -240,7 +294,7 @@ public class MemoryView extends View {
                 R.drawable.robo, R.drawable.vampiro, R.drawable.zoombie
         };
 
-        tiles = new Bitmap[tilesIndices.length];
+        tiles = new Bitmap[game.getAmountOfCards()];
         for (int i = 0; i < tiles.length; i++) {
             tiles[i] = BitmapFactory.decodeResource(resources, tilesIndices[i], options);
             tiles[i] = Bitmap.createBitmap(tiles[i], 0, 0, IMAGE_SIZE, IMAGE_SIZE, matrix, true);
@@ -257,18 +311,37 @@ public class MemoryView extends View {
 
         int x = ((int) event.getX(event.getActionIndex())) - metrics.offsetX + metrics.paddingBetweenTiles;
         int y = ((int) event.getY(event.getActionIndex())) - metrics.offsetY + metrics.paddingBetweenTiles;
-        if (x < 0 || y < 0)
-            return false;
-        int xTile = x / (metrics.tileSize + metrics.paddingBetweenTiles);
-        int yTile = y / (metrics.tileSize + metrics.paddingBetweenTiles);
-        if (xTile >= game.width || yTile >= game.height)
-            return false;
+
+        if (exitIcon.isTouched(event)) {
+            new ConfirmDialog(getContext(), dialogExitListener)
+                    .show(getResources().getString(R.string.exit_dialog));
+            return true;
+        } else if (dificultyIcon.isTouched(event)) {
+            if (needShowDialog) {
+                new ConfirmDialog(getContext(), dialogChangeDificultyListener)
+                        .show(getResources().getString(R.string.change_dificulty_dialog));
+            } else {
+                changeDificulty();
+            }
+            return true;
+        } else if (game.isDone()) {
+            new ConfirmDialog(getContext(), dialogNewGameListener)
+                    .show(getResources().getString(R.string.new_game_dialog));
+            return true;
+        }
+        needShowDialog = true;
 
         if (!game.isStarted()) {
             game.start();
         }
 
-        if (game.click(xTile, yTile)) {
+        // cards click
+        int xTile = x / (metrics.tileSize + metrics.paddingBetweenTiles);
+        int yTile = y / (metrics.tileSize + metrics.paddingBetweenTiles);
+        if (xTile >= game.width || yTile >= game.height)
+            return false;
+
+        if (game.clickOnCard(xTile, yTile)) {
             performHapticFeedback(HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING/* =1=VIRTUAL_KEY */);
             if (game.isWaitingForTimeout()) {
                 startTimeoutCountdown();
