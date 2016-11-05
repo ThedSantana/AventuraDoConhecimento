@@ -19,7 +19,7 @@ public class Number extends GameObject {
 
         x = xAxis;
         y = yAxis;
-        radius = 20;
+        radius = GameView.getWidthProportion(20);
         width = height = radius * 2;
         value = val;
 
@@ -30,7 +30,7 @@ public class Number extends GameObject {
 
         paintText = new Paint();
         paintText.setColor(color);
-        paintText.setTextSize(24);
+        paintText.setTextSize(GameView.getWidthProportion(24));
         paintText.setStrokeWidth(1);
     }
 
@@ -50,10 +50,10 @@ public class Number extends GameObject {
     public void draw(Canvas canvas) {
         canvas.drawCircle(x, y, radius, paint);
 
-        int xa = value < 10 ? 7 : 14;
-//        String a= "cordX: "+ x + " cordY: "+ y;
-//        canvas.drawText(Integer.toString(value)+a, x - xa, y + 8, paintText);
-        canvas.drawText(Integer.toString(value), x - xa, y + 8, paintText);
+        int xa = GameView.getHeightProportion(value < 10 ? 7 : 14);
+        int ya = GameView.getHeightProportion(8);
+
+        canvas.drawText(Integer.toString(value), x - xa, y + ya, paintText);
     }
 
     public boolean isFilled()  {

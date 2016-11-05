@@ -1,12 +1,12 @@
 package br.com.lealweb.aventuradoconhecimento.jogopreenchernumeros;
 
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static br.com.lealweb.aventuradoconhecimento.jogopreenchernumeros.GameView.Dificulty.*;
-
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -27,9 +26,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         ONE_DICE, TWO_DICES, THREE_DICES;
     }
 
-    public static int WIDTH = 1000;
+    public static int SCREEN_WIDTH_RATIO = 800;
+    public static int SCREEN_HEIGHT_RATIO = 480;
+    public static int SCREEN_WIDTH;
+    public static int SCREEN_HEIGHT;
 
-    public static int HEIGHT = 600;
+
     private static final long BLINK_DURATION = 350;
     private MainThread thread;
     private GameActivity gameActivity;
@@ -55,12 +57,21 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super(context);
 
         gameActivity = (GameActivity) context;
+        setupMetrics();
 
         getHolder().addCallback(this);
         setFocusable(true);
 
         SoundManager.initSounds(context);
         thread = new MainThread(getHolder(), this);
+    }
+
+    private void setupMetrics() {
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        gameActivity.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        SCREEN_WIDTH = displaymetrics.widthPixels;
+        SCREEN_HEIGHT = displaymetrics.heightPixels;
     }
 
     @Override
@@ -81,19 +92,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        int w = this.getMeasuredWidth();
-        int h = this.getMeasuredHeight();
-
-        if (WIDTH != w && w > 0) {
-            WIDTH = w;
-        }
-
-        if (HEIGHT != h && h > 0) {
-            HEIGHT = h;
-        }
-
         paintText = new Paint();
-        paintText.setTextSize(18);
+        paintText.setTextSize(18 * SCREEN_WIDTH / SCREEN_WIDTH_RATIO);
         paintText.setFakeBoldText(true);
 
         blinkColor = Color.BLUE;
@@ -111,16 +111,17 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private void setNewGame() {
         dices = new ArrayList<>();
-        int[] pos = {250,450,350};
+        int centerScreen = SCREEN_WIDTH/2;
+        int[] pos = {centerScreen - getWidthProportion(120), centerScreen + getWidthProportion(120) ,centerScreen};
         for (int i = 0; i <= dificulty.ordinal(); i++) {
             dices.add(new Dice(getContext(), pos[i], 5));
         }
 
         player1 = new Player(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player1_elephant)
-                , 60, 110, Color.YELLOW, "Jogador 1"
+                , 40, 90, Color.YELLOW, "Jogador 1"
         );
         player2 = new Player(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.jpn_player2_elephant)
-                , 450, 110, Color.GREEN, "Jogador 2"
+                , SCREEN_WIDTH_RATIO/2+40, 90, Color.GREEN, "Jogador 2"
         );
 
         playerTurn = player1;
@@ -270,10 +271,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         action = Actions.ROLL_DICE;
     }
 
-    private void setDificulty(Dificulty dificulty) {
-        this.dificulty = dificulty;
-    }
-
     static public Dificulty getDificulty() {
         return dificulty;
     }
@@ -300,38 +297,47 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
-        final float scaleFactorX = getWidth()/(WIDTH*1.f);
-        final float scaleFactorY = getHeight()/(HEIGHT*1.f);
+        bg.draw(canvas);
 
-        if(canvas != null) {
-            final int savedState = canvas.save();
-            canvas.scale(scaleFactorX, scaleFactorY);
-            bg.draw(canvas);
-            dificultyIcon.draw(canvas);
-            exitIcon.draw(canvas);
-            player1.draw(canvas);
-            player2.draw(canvas);
+        player1.draw(canvas);
+        player2.draw(canvas);
 
-            for (Dice dice : dices) {
-                dice.draw(canvas);
-            }
-            canvas.restoreToCount(savedState);
+        drawPlayerTurnMessage(canvas);
+
+        if (playerTurn.isWinner()) {
+            drawWinnerMessage(canvas);
         }
 
-        paintText.setColor(Color.RED);
-        canvas.drawText("É a vez do ", 20, 20, paintText);
-        paintText.setColor(playerTurn.getColor());
-        canvas.drawText(playerTurn.getName(), 110, 20, paintText);
+        for (Dice dice : dices) {
+            dice.draw(canvas);
+        }
 
+        dificultyIcon.draw(canvas);
+        exitIcon.draw(canvas);
+    }
+
+    private void drawWinnerMessage(Canvas canvas) {
         if (blink) {
             blinkColor = (blinkColor == Color.BLUE) ? Color.RED :
                     ((blinkColor == Color.YELLOW) ? Color.BLUE : Color.YELLOW);
             paintText.setColor(blinkColor);
         }
-        if (playerTurn.isWinner()) {
-            canvas.drawText(playerTurn.getName() +" GANHOU!!!", WIDTH / 2 - 100, HEIGHT / 2, paintText);
-        }
+        canvas.drawText(playerTurn.getName() +" GANHOU!!!", SCREEN_WIDTH / 2 - 110, SCREEN_HEIGHT / 2, paintText);
+    }
+
+    private void drawPlayerTurnMessage(Canvas canvas) {
+        paintText.setColor(Color.RED);
+        canvas.drawText("É a vez do ", getWidthProportion(20), getHeightProportion(20), paintText);
+        paintText.setColor(playerTurn.getColor());
+        canvas.drawText(playerTurn.getName(), getWidthProportion(110), getHeightProportion(20), paintText);
     }
 
 
+    public static int getWidthProportion(int value) {
+        return value * GameView.SCREEN_WIDTH / GameView.SCREEN_WIDTH_RATIO;
+    }
+
+    public static int getHeightProportion(int value) {
+        return value * GameView.SCREEN_HEIGHT / GameView.SCREEN_HEIGHT_RATIO;
+    }
 }

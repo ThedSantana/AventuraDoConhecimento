@@ -4,9 +4,6 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-/**
- * Created by leonardoleal on 16/10/16.
- */
 public class DificultyIcon extends GameObject {
 
     public DificultyIcon(Context c) {
@@ -14,7 +11,8 @@ public class DificultyIcon extends GameObject {
         image = BitmapFactory.decodeResource(context.getResources(), R.drawable.jpn_dificulty);
         width = image.getWidth();
         height = image.getHeight();
-        y = GameView.HEIGHT - height;
+        y = GameView.SCREEN_HEIGHT - height;
+        x = 10;
     }
 
     public void update() {}

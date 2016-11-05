@@ -4,9 +4,6 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-/**
- * Created by leonardoleal on 16/10/16.
- */
 public class ExitIcon extends GameObject {
 
     public ExitIcon(Context c) {
@@ -14,7 +11,8 @@ public class ExitIcon extends GameObject {
         image = BitmapFactory.decodeResource(context.getResources(), R.drawable.jpn_exit);
         width = image.getWidth();
         height = image.getHeight();
-        x = GameView.WIDTH - width;
+        x = GameView.SCREEN_WIDTH - width;
+        y = 10;
     }
 
     public void update() {}
