@@ -16,20 +16,17 @@ public class Figuries {
     public Figuries() {
         figures = new ArrayList<>();
 
-//        figures.add(new Figure("abobora", GameUtil.decodeImage("abobora.png")));
-//        figures.add(new Figure("bruxa", GameUtil.decodeImage("bruxa.png")));
-//        figures.add(new Figure("bruxa", GameUtil.decodeImage("bruxa1.png")));
-//        figures.add(new Figure("casa", GameUtil.decodeImage("casa_assombrada.png")));
-//        figures.add(new Figure("ciclope", GameUtil.decodeImage("ciclope.png")));
-//        figures.add(new Figure("dragao", GameUtil.decodeImage("dragao.png")));
-//        figures.add(new Figure("fantasma", GameUtil.decodeImage("fantasma.png")));
-//        figures.add(new Figure("gato", GameUtil.decodeImage("gato_preto.png")));
-//        figures.add(new Figure("medusa", GameUtil.decodeImage("medusa.png")));
-//        figures.add(new Figure("mumia", GameUtil.decodeImage("mumia.png")));
-//        figures.add(new Figure("raio", GameUtil.decodeImage("raio.png")));
-//        figures.add(new Figure("robo", GameUtil.decodeImage("robo.png")));
-//        figures.add(new Figure("vampiro", GameUtil.decodeImage("vampiro.png")));
-        figures.add(new Figure("zumbi", GameUtil.decodeImage("zoombie.png")));
+        figures.add(new Figure("bruxa", GameUtil.decodeImage("bruxa.png")));
+        figures.add(new Figure("bruxa", GameUtil.decodeImage("bruxa1.png")));
+        figures.add(new Figure("casa", GameUtil.decodeImage("casa_assombrada.png")));
+        figures.add(new Figure("ciclope", GameUtil.decodeImage("ciclope.png")));
+        figures.add(new Figure("fantasma", GameUtil.decodeImage("fantasma.png")));
+        figures.add(new Figure("gato", GameUtil.decodeImage("gato_preto.png")));
+        figures.add(new Figure("medusa", GameUtil.decodeImage("medusa.png")));
+        figures.add(new Figure("mumia", GameUtil.decodeImage("mumia.png")));
+        figures.add(new Figure("raio", GameUtil.decodeImage("raio.png")));
+        figures.add(new Figure("vampiro", GameUtil.decodeImage("vampiro.png")));
+        figures.add(new Figure("zumbi", GameUtil.decodeImage("zumbi.png")));
     }
 
     public Figure getFigureAleatorie() {
